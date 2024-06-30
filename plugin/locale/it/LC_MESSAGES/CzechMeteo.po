@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OpenPLi - MeteoViewer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 09:59+0200\n"
+"POT-Creation-Date: 2024-06-30 12:20+0200\n"
 "PO-Revision-Date: 2013-02-06 17:54+0100\n"
 "Last-Translator: Spaeleus <spaeleus@croci.org>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -320,7 +320,7 @@ msgstr "Info e barra di progressione"
 msgid "menu"
 msgstr "Menu"
 
-#: ../ui.py:116
+#: ../ui.py:103 ../ui.py:116
 msgid "no"
 msgstr "No"
 

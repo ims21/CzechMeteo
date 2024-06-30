@@ -100,7 +100,7 @@ config.plugins.czechmeteo = ConfigSubsection()
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
 config.plugins.czechmeteo.frames = ConfigSelection(default="0", choices=[("0", _("downloaded interval")), ("1", _("all frames"))])
 config.plugins.czechmeteo.time = ConfigSelection(default="750", choices=[("400", "400 ms"), ("500", "500 ms"), ("600", "600 ms"), ("750", "750 ms"), ("1000", "1s"), ("2000", "2s"), ("5000", "5s"), ("10000", "10s")])
-config.plugins.czechmeteo.refresh = ConfigSelection(default="0", choices=[("0", "no"), ("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("10", "10"), ("15", "15")])
+config.plugins.czechmeteo.refresh = ConfigSelection(default="0", choices=[("0", _("no")), ("1", "1"), ("2", "2"), ("3", "3"), ("4", "4"), ("5", "5"), ("10", "10"), ("15", "15")])
 config.plugins.czechmeteo.slidetype = ConfigSelection(default="0", choices=[("0", _("begin")), ("1", _("actual position"))])
 config.plugins.czechmeteo.download = ConfigYesNo(default=False)
 # CHOICES FOR OPTIONS:
@@ -110,7 +110,7 @@ for i in range(0, len(INFO)):
 config.plugins.czechmeteo.type = ConfigSelection(default="5", choices=choicelist)
 
 # CHOICES FOR AFTER "ALL" (WITHOUT "ALL"):
-config.plugins.czechmeteo.typeafterall = ConfigSelection(default="7", choices=config.plugins.czechmeteo.type.choices[:-1])
+config.plugins.czechmeteo.typeafterall = ConfigSelection(default="5", choices=config.plugins.czechmeteo.type.choices[:-1])
 config.plugins.czechmeteo.display = ConfigSelection(default="3", choices=[("0", _("none")), ("1", _("info")), ("2", _("progress bar")), ("3", _("info and progress bar"))])
 config.plugins.czechmeteo.localtime = ConfigYesNo(default=False)
 config.plugins.czechmeteo.delete = ConfigSelection(default="4", choices=[("0", _("no")), ("1", _("current type")), ("2", _("all types")),

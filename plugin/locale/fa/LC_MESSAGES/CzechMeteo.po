@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: meteo viewer Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 09:59+0200\n"
+"POT-Creation-Date: 2024-06-30 12:20+0200\n"
 "PO-Revision-Date: 2012-07-28 22:35+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -366,7 +366,7 @@ msgid "menu"
 msgstr "منو"
 
 #
-#: ../ui.py:116
+#: ../ui.py:103 ../ui.py:116
 msgid "no"
 msgstr "نه"
 

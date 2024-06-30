@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OpenPLi - MeteoViewer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 09:59+0200\n"
+"POT-Creation-Date: 2024-06-30 12:20+0200\n"
 "PO-Revision-Date: 2018-07-27 17:54+0100\n"
 "Last-Translator: chipcard <github.com/chipcard>\n"
 "Language-Team: cpteam <github.com/chipcard>\n"
@@ -318,7 +318,7 @@ msgstr "info és progress bar"
 msgid "menu"
 msgstr "menü"
 
-#: ../ui.py:116
+#: ../ui.py:103 ../ui.py:116
 msgid "no"
 msgstr "nem"
 
