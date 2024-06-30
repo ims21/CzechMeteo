@@ -16,10 +16,19 @@ from __future__ import absolute_import
 #
 
 from Plugins.Plugin import PluginDescriptor
+from Components.config import config, ConfigSubsection, ConfigYesNo
+
+config.plugins.czechmeteo = ConfigSubsection()
+config.plugins.czechmeteo.extended_menu = ConfigYesNo(default=False)
 
 def main(session, **kwargs):
 	from . import ui
 	session.open(ui.czechMeteo)
 
 def Plugins(path,**kwargs):
-	return PluginDescriptor(name="Czech MeteoViewer", description=_("czech meteo information viewer"), where=[PluginDescriptor.WHERE_PLUGINMENU], icon = "czmeteo.png", fnc=main)
+	name = _("Czech Meteo")
+	descr = _("czech meteo information viewer")
+	pluginList = [PluginDescriptor(name=name, description=descr, where=[PluginDescriptor.WHERE_PLUGINMENU], icon="czmeteo.png", fnc=main)]
+	if config.plugins.czechmeteo.extended_menu.value:
+		pluginList.append(PluginDescriptor(name=name, description=descr, where=PluginDescriptor.WHERE_EXTENSIONSMENU, icon="czmeteo.png", fnc=main))
+	return pluginList

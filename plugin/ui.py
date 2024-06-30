@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2024
-VERSION = "ims (c) 2012-2024 v2.01"
+VERSION = "ims (c) 2012-2024 v2.02"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -95,8 +95,6 @@ EMPTYFRAME = "e.jpg"
 
 RADAR_MM = "radar_mm.png"
 
-
-config.plugins.czechmeteo = ConfigSubsection()
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
 config.plugins.czechmeteo.frames = ConfigSelection(default="0", choices=[("0", _("downloaded interval")), ("1", _("all frames"))])
 config.plugins.czechmeteo.time = ConfigSelection(default="750", choices=[("400", "400 ms"), ("500", "500 ms"), ("600", "600 ms"), ("750", "750 ms"), ("1000", "1s"), ("2000", "2s"), ("5000", "5s"), ("10000", "10s")])
@@ -1177,6 +1175,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		self.tmpdir_entry = getConfigListEntry(_("Directory for download"), cfg.tmpdir)
 
 		cfgList = []
+		cfgList.append(getConfigListEntry(_("Run from 'Extended' menu"), cfg.extended_menu))
 		cfgList.append(getConfigListEntry(_("Downloaded interval"), cfg.nr))
 		cfgList.append(getConfigListEntry(_("Display"), cfg.frames))
 		cfgList.append(getConfigListEntry(_("Slideshow's step"), cfg.time))
@@ -1190,7 +1189,6 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Frames info"), cfg.display))
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
-
 		cfgList.append(self.tmpdir_entry)
 		ConfigListScreen.__init__(self, cfgList, session, on_change=self.changedEntry)
 
@@ -1245,8 +1243,15 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 			text = _("!!! '%s' as 'All' cannot be used with '/tmp/' !!!") % _("Type of meteo info on start")
 			self["statusbar"].setText(text)
 			return
+		self.refreshPlugins()
 		self.keySave()
 
 	def exit(self):
 		cfg.tmpdir.value = self.old_dir
 		self.keyCancel()
+
+	def refreshPlugins(self):
+		from Components.PluginComponent import plugins
+		from Tools.Directories import SCOPE_PLUGINS, resolveFilename
+		plugins.clearPluginList()
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
