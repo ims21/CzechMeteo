@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: meteo viewer Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 12:20+0200\n"
+"POT-Creation-Date: 2024-06-30 13:19+0200\n"
 "PO-Revision-Date: 2012-07-28 22:35+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -13,13 +13,13 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
-#: ../ui.py:1247
+#: ../ui.py:1243
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr ""
 
 #
-#: ../ui.py:845 ../ui.py:849
+#: ../ui.py:842 ../ui.py:846
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr ""
@@ -38,12 +38,12 @@ msgid "24h-MF Czech Republic"
 msgstr ""
 
 #
-#: ../ui.py:487
+#: ../ui.py:484
 msgid "Abort"
 msgstr "نتیجه ای در بر نداشت"
 
 #
-#: ../ui.py:1188
+#: ../ui.py:1186
 msgid "After download \"All\" switch to"
 msgstr ""
 
@@ -52,18 +52,24 @@ msgid "All"
 msgstr ""
 
 #
-#: ../ui.py:889
+#: ../ui.py:886
 msgid "Are You sure delete this frame?"
 msgstr "آیا واقعا می خواهید این فریم را حذف کنید ؟"
 
-#: ../ui.py:485
+#: ../ui.py:482
 msgid "Back"
 msgstr ""
 
 #
-#: ../ui.py:309 ../ui.py:513 ../ui.py:1168
+#: ../ui.py:306 ../ui.py:510 ../ui.py:1165
 msgid "Cancel"
 msgstr "لغو کردن"
+
+#
+#: ../plugin.py:29
+#, fuzzy
+msgid "Czech Meteo"
+msgstr "CzechMeteo راه انداری نمایشگر"
 
 #: ../ui.py:49
 msgid "Czech Radar"
@@ -73,67 +79,63 @@ msgstr ""
 msgid "Czech Storm"
 msgstr ""
 
-#: ../ui.py:266 ../ui.py:386 ../ui.py:458
+#: ../ui.py:263 ../ui.py:383 ../ui.py:455
 msgid "CzechMeteo"
 msgstr ""
 
 #
-#: ../ui.py:1164 ../ui.py:1221
+#: ../ui.py:1161 ../ui.py:1217
 #, fuzzy
 msgid "CzechMeteo Setup"
 msgstr "CzechMeteo راه انداری نمایشگر"
 
-#: ../ui.py:1194
-msgid "Delay frame release for weatheronline"
-msgstr ""
-
 #
-#: ../ui.py:1189
+#: ../ui.py:1187
 msgid "Delete old files before download"
 msgstr "حذف فایل های قدیمی قبل از بارگذاری"
 
 #
-#: ../ui.py:1178
+#: ../ui.py:1175
 msgid "Directory for download"
 msgstr "دایرکتوری برای بارگذاری شده ها"
 
 #
-#: ../ui.py:1182
+#: ../ui.py:1180
 msgid "Display"
 msgstr "نمایش"
 
 #
-#: ../ui.py:311 ../ui.py:515 ../ui.py:794
+#: ../ui.py:308 ../ui.py:512 ../ui.py:791
 msgid "Download"
 msgstr "بارگذاری کردن"
 
 #
-#: ../ui.py:1186
+#: ../ui.py:1184
 msgid "Download info on plugin's start"
 msgstr "بارگذاری اطلاعات بروی پلاگین"
 
 #
-#: ../ui.py:623 ../ui.py:673 ../ui.py:695
+#: ../ui.py:620 ../ui.py:670 ../ui.py:692
 msgid "Download pictures, please!"
 msgstr "بارگذاری تصاویر و لطفا !"
 
 #
-#: ../ui.py:493
+#: ../ui.py:490
 msgid "Download:"
 msgstr "بارگذاری کردن"
 
 #
-#: ../ui.py:1181
+#: ../ui.py:1179
 msgid "Downloaded interval"
 msgstr "بارگذاری بازه زمانی"
 
 #
-#: ../ui.py:920
+#: ../ui.py:917
 msgid "Erase files..."
 msgstr "پاک کردن فایل ها ..."
 
 #
-#: ../ui.py:1191
+#: ../ui.py:1189
 msgid "Frames info"
 msgstr "فریم اطلاعات"
 
@@ -165,43 +167,43 @@ msgid ""
 msgstr ""
 
 #
-#: ../ui.py:878
+#: ../ui.py:875
 msgid "LT"
 msgstr ""
 
 #
-#: ../ui.py:1192
+#: ../ui.py:1190
 msgid "Local time in info"
 msgstr "نمایش زمان محلی در نوار اطلاعات"
 
 #
-#: ../ui.py:1228
+#: ../ui.py:1224
 msgid "Location for CzechMeteo"
 msgstr "Meteo مکانی برای نمایشگر"
 
 #
-#: ../ui.py:584 ../ui.py:715 ../ui.py:735 ../ui.py:803 ../ui.py:841
-#: ../ui.py:891
+#: ../ui.py:581 ../ui.py:712 ../ui.py:732 ../ui.py:800 ../ui.py:838
+#: ../ui.py:888
 msgid "No files found!"
 msgstr "هیچ فایل یافت نشد"
 
 #
-#: ../ui.py:1190
+#: ../ui.py:1188
 msgid "On exit delete files"
 msgstr "خارج شدن از فایل های حذف شده"
 
 #
-#: ../ui.py:312 ../ui.py:516 ../ui.py:795
+#: ../ui.py:309 ../ui.py:513 ../ui.py:792
 msgid "Options"
 msgstr "گزینه ها"
 
 #
-#: ../ui.py:1193
+#: ../ui.py:1191
 msgid "Parallels and meridians"
 msgstr ""
 
 #
-#: ../ui.py:472
+#: ../ui.py:469
 msgid "Prepare..."
 msgstr "آمادی سازی کردن ..."
 
@@ -213,43 +215,47 @@ msgid ""
 msgstr ""
 
 #
-#: ../ui.py:1184
+#: ../ui.py:1182
 msgid "Refresh slideshow"
 msgstr "بازآوری نمایش اسلایدها"
 
+#: ../ui.py:1178
+msgid "Run from 'Extended' menu"
+msgstr ""
+
 #
-#: ../ui.py:1167
+#: ../ui.py:1164
 msgid "Save"
 msgstr "ذخیره سازی کردن "
 
 #
-#: ../ui.py:406
+#: ../ui.py:403
 msgid "Select info type:"
 msgstr "meteo انتخاب نوع انتخاب شده"
 
 #
-#: ../ui.py:514 ../ui.py:572 ../ui.py:793
+#: ../ui.py:511 ../ui.py:569 ../ui.py:790
 msgid "Slideshow"
 msgstr "نمایش اسلایدها"
 
 #
-#: ../ui.py:1185
+#: ../ui.py:1183
 msgid "Slideshow begins from"
 msgstr "شروع نمایش بصورت اسلایدوار از ...."
 
 #
-#: ../ui.py:1183
+#: ../ui.py:1181
 msgid "Slideshow's step"
 msgstr "مراحل نمایش اسلایدها"
 
 #
-#: ../ui.py:783
+#: ../ui.py:780
 #, fuzzy
 msgid "Stop Show"
 msgstr "متوقف سازی نمایش "
 
 #
-#: ../ui.py:500 ../ui.py:713 ../ui.py:733
+#: ../ui.py:497 ../ui.py:710 ../ui.py:730
 msgid "Stop slideshow, please!"
 msgstr "متوقف سازی نمایش اسلایدها و لطفا !"
 
@@ -258,12 +264,12 @@ msgid "Storm detection"
 msgstr ""
 
 #
-#: ../ui.py:1187 ../ui.py:1247
+#: ../ui.py:1185 ../ui.py:1243
 msgid "Type of meteo info on start"
 msgstr "در شروع کار meteo نوع اطلاعات"
 
 #
-#: ../ui.py:880
+#: ../ui.py:877
 msgid "UTC"
 msgstr ""
 
@@ -282,156 +288,156 @@ msgid "VIS-IR Czech Republic"
 msgstr ""
 
 #
-#: ../ui.py:104
+#: ../ui.py:102
 msgid "actual position"
 msgstr "جایگاه واقعی"
 
 #
-#: ../ui.py:101
+#: ../ui.py:99
 msgid "all frames"
 msgstr "همه فریم ها"
 
 #
-#: ../ui.py:116
+#: ../ui.py:114
 msgid "all types"
 msgstr "همه نوع ها"
 
 #
-#: ../ui.py:104
+#: ../ui.py:102
 msgid "begin"
 msgstr "شروع کردن"
 
 #
-#: ../ui.py:116
+#: ../ui.py:114
 msgid "current type"
 msgstr "نوع فعلی"
 
-#: ../plugin.py:25
+#: ../plugin.py:30
 msgid "czech meteo information viewer"
 msgstr ""
 
 #
-#: ../ui.py:288
+#: ../ui.py:285
 msgid "delete current frame"
 msgstr "حذف فریم های موجود"
 
 #
-#: ../ui.py:101
+#: ../ui.py:99
 msgid "downloaded interval"
 msgstr "بارگذاری بازه زمانی"
 
 #
-#: ../ui.py:270 ../ui.py:281
+#: ../ui.py:267 ../ui.py:278
 msgid "exit plugin"
 msgstr "خارج شدن از پلاگین"
 
 #
-#: ../ui.py:289
+#: ../ui.py:286
 msgid "go to first downloaded frame"
 msgstr "رفتن به اولین فریم بارگذاری شده"
 
 #
-#: ../ui.py:290
+#: ../ui.py:287
 msgid "go to last downloaded frame"
 msgstr "رفتن به آخرین فریم بارگذاری شده"
 
 #
-#: ../ui.py:271
+#: ../ui.py:268
 msgid "go to last frame"
 msgstr "رفتن به آخرین فریم"
 
 #
-#: ../ui.py:278
+#: ../ui.py:275
 msgid "go to next frame"
 msgstr "رفتن به فریم بعدی"
 
 #
-#: ../ui.py:277
+#: ../ui.py:274
 msgid "go to previous frame"
 msgstr "رفتن به فریم قبلی"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "info"
 msgstr "اطلاعات"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "info and progress bar"
 msgstr "اطلاعات و نوار پیشرفت کار "
 
 #
-#: ../ui.py:276
+#: ../ui.py:273
 msgid "menu"
 msgstr "منو"
 
 #
-#: ../ui.py:103 ../ui.py:116
+#: ../ui.py:101 ../ui.py:114
 msgid "no"
 msgstr "نه"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "none"
 msgstr "هیچ کدام"
 
 #
-#: ../ui.py:117
+#: ../ui.py:115
 msgid "older than downloaded interval"
 msgstr "قدیمی تر از بازه زمانی بارگذاری"
 
 #
-#: ../ui.py:117
+#: ../ui.py:115
 msgid "older than max. interval"
 msgstr "قدیمی تر از بازه زمانی نهایی"
 
 #
-#: ../ui.py:285
+#: ../ui.py:282
 msgid "options"
 msgstr "گزینه ها"
 
 #
-#: ../ui.py:283
+#: ../ui.py:280
 #, fuzzy
 msgid "play slideshow"
 msgstr "نمایش / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:282
+#: ../ui.py:279
 msgid "play/stop slideshow"
 msgstr "نمایش / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "progress bar"
 msgstr "نوار پیشرفت کار"
 
 #
-#: ../ui.py:523
+#: ../ui.py:520
 msgid "refresh..."
 msgstr "بازآوری کردن ..."
 
 #
-#: ../ui.py:284
+#: ../ui.py:281
 msgid "run/abort download"
 msgstr "اجرا یا لغو بارگذاری های بی نتیجه"
 
 #
-#: ../ui.py:286
+#: ../ui.py:283
 msgid "stop slideshow/synaptic map"
 msgstr " synaptic map / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:279
+#: ../ui.py:276
 msgid "switch to next meteo type"
 msgstr "meteo  سوئیچ کردن به نوع بعدی"
 
 #
-#: ../ui.py:280
+#: ../ui.py:277
 msgid "switch to previous meteo type"
 msgstr "meteo  سوئیچ کردن به نوع قبلی"
 
 #
-#: ../ui.py:287
+#: ../ui.py:284
 msgid "synaptic maps"
 msgstr ""

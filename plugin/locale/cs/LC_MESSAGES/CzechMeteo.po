@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MeteoViewer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 12:20+0200\n"
-"PO-Revision-Date: 2024-06-30 10:09+0200\n"
+"POT-Creation-Date: 2024-06-30 13:19+0200\n"
+"PO-Revision-Date: 2024-06-30 13:20+0200\n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: ims\n"
 "Language: cs_CZ\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.3\n"
 
-#: ../ui.py:1247
+#: ../ui.py:1243
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr "!!! '%s' jako 'All' nelze použít s  '/tmp/' !!!"
 
 #
-#: ../ui.py:845 ../ui.py:849
+#: ../ui.py:842 ../ui.py:846
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr "%s z %s  -  %s"
@@ -48,12 +48,12 @@ msgid "24h-MF Czech Republic"
 msgstr "24h-MF Česká republika"
 
 #
-#: ../ui.py:487
+#: ../ui.py:484
 msgid "Abort"
 msgstr "Přerušit"
 
 #
-#: ../ui.py:1188
+#: ../ui.py:1186
 msgid "After download \"All\" switch to"
 msgstr "Po stažení \"All\" přepnout do"
 
@@ -62,18 +62,23 @@ msgid "All"
 msgstr "Vše"
 
 #
-#: ../ui.py:889
+#: ../ui.py:886
 msgid "Are You sure delete this frame?"
 msgstr "Chcete opravdu smazat tento snímek?"
 
-#: ../ui.py:485
+#: ../ui.py:482
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 #
-#: ../ui.py:309 ../ui.py:513 ../ui.py:1168
+#: ../ui.py:306 ../ui.py:510 ../ui.py:1165
 msgid "Cancel"
 msgstr "Zavřít"
+
+#
+#: ../plugin.py:29
+msgid "Czech Meteo"
+msgstr "CzechMeteo"
 
 #: ../ui.py:49
 msgid "Czech Radar"
@@ -83,66 +88,62 @@ msgstr "Radar"
 msgid "Czech Storm"
 msgstr "Detekce blesků"
 
-#: ../ui.py:266 ../ui.py:386 ../ui.py:458
+#: ../ui.py:263 ../ui.py:383 ../ui.py:455
 msgid "CzechMeteo"
 msgstr ""
 
 #
-#: ../ui.py:1164 ../ui.py:1221
+#: ../ui.py:1161 ../ui.py:1217
 msgid "CzechMeteo Setup"
 msgstr "Nastavení CzechMeteo"
 
-#: ../ui.py:1194
-msgid "Delay frame release for weatheronline"
-msgstr "Zpoždění vydání snímku pro weatheronline"
-
 #
-#: ../ui.py:1189
+#: ../ui.py:1187
 msgid "Delete old files before download"
 msgstr "Před stahováním odstranit soubory"
 
 #
-#: ../ui.py:1178
+#: ../ui.py:1175
 msgid "Directory for download"
 msgstr "Adresář pro ukládání"
 
 #
-#: ../ui.py:1182
+#: ../ui.py:1180
 msgid "Display"
 msgstr "Zobrazovat"
 
 #
-#: ../ui.py:311 ../ui.py:515 ../ui.py:794
+#: ../ui.py:308 ../ui.py:512 ../ui.py:791
 msgid "Download"
 msgstr "Stáhnout"
 
 #
-#: ../ui.py:1186
+#: ../ui.py:1184
 msgid "Download info on plugin's start"
 msgstr "Stahovat informace po spuštění pluginu"
 
 #
-#: ../ui.py:623 ../ui.py:673 ../ui.py:695
+#: ../ui.py:620 ../ui.py:670 ../ui.py:692
 msgid "Download pictures, please!"
 msgstr "Stahněte soubory, prosím!"
 
 #
-#: ../ui.py:493
+#: ../ui.py:490
 msgid "Download:"
 msgstr "Stahování:"
 
 #
-#: ../ui.py:1181
+#: ../ui.py:1179
 msgid "Downloaded interval"
 msgstr "Stahovaný interval"
 
 #
-#: ../ui.py:920
+#: ../ui.py:917
 msgid "Erase files..."
 msgstr "Mazání souborů..."
 
 #
-#: ../ui.py:1191
+#: ../ui.py:1189
 msgid "Frames info"
 msgstr "Zobrazovat informace o snímku"
 
@@ -184,43 +185,43 @@ msgstr ""
 "  - ČERVENÁ = -73%sC (200 K)"
 
 #
-#: ../ui.py:878
+#: ../ui.py:875
 msgid "LT"
 msgstr "(místní čas)"
 
 #
-#: ../ui.py:1192
+#: ../ui.py:1190
 msgid "Local time in info"
 msgstr "Místní čas v info"
 
 #
-#: ../ui.py:1228
+#: ../ui.py:1224
 msgid "Location for CzechMeteo"
 msgstr "Umístění pro CzechMeteo"
 
 #
-#: ../ui.py:584 ../ui.py:715 ../ui.py:735 ../ui.py:803 ../ui.py:841
-#: ../ui.py:891
+#: ../ui.py:581 ../ui.py:712 ../ui.py:732 ../ui.py:800 ../ui.py:838
+#: ../ui.py:888
 msgid "No files found!"
 msgstr "Nebyly nalezeny žádné soubory!"
 
 #
-#: ../ui.py:1190
+#: ../ui.py:1188
 msgid "On exit delete files"
 msgstr "Smazat soubory po ukončení"
 
 #
-#: ../ui.py:312 ../ui.py:516 ../ui.py:795
+#: ../ui.py:309 ../ui.py:513 ../ui.py:792
 msgid "Options"
 msgstr "Možnosti"
 
 #
-#: ../ui.py:1193
+#: ../ui.py:1191
 msgid "Parallels and meridians"
 msgstr "Zobrazovat rovnoběžky a poledníky"
 
 #
-#: ../ui.py:472
+#: ../ui.py:469
 msgid "Prepare..."
 msgstr "Příprava..."
 
@@ -235,42 +236,46 @@ msgstr ""
 "  - aktuální snímek sloučené radarové informace z České radarové sítě CZRAD (z radarů Brdy-Praha a Skalky)"
 
 #
-#: ../ui.py:1184
+#: ../ui.py:1182
 msgid "Refresh slideshow"
 msgstr "Aktualizace prezentace"
 
+#: ../ui.py:1178
+msgid "Run from 'Extended' menu"
+msgstr "Spouštět z Extended menu"
+
 #
-#: ../ui.py:1167
+#: ../ui.py:1164
 msgid "Save"
 msgstr "Uložit"
 
 #
-#: ../ui.py:406
+#: ../ui.py:403
 msgid "Select info type:"
 msgstr "Zvolte požadované meteorologické informace:"
 
 #
-#: ../ui.py:514 ../ui.py:572 ../ui.py:793
+#: ../ui.py:511 ../ui.py:569 ../ui.py:790
 msgid "Slideshow"
 msgstr "Prezentace"
 
 #
-#: ../ui.py:1185
+#: ../ui.py:1183
 msgid "Slideshow begins from"
 msgstr "Prezentace začíná od"
 
 #
-#: ../ui.py:1183
+#: ../ui.py:1181
 msgid "Slideshow's step"
 msgstr "Krok prezentace"
 
 #
-#: ../ui.py:783
+#: ../ui.py:780
 msgid "Stop Show"
 msgstr "Zastavit"
 
 #
-#: ../ui.py:500 ../ui.py:713 ../ui.py:733
+#: ../ui.py:497 ../ui.py:710 ../ui.py:730
 msgid "Stop slideshow, please!"
 msgstr "Zastavte prezentaci, prosím!"
 
@@ -279,12 +284,12 @@ msgid "Storm detection"
 msgstr "Detekce blesků"
 
 #
-#: ../ui.py:1187 ../ui.py:1247
+#: ../ui.py:1185 ../ui.py:1243
 msgid "Type of meteo info on start"
 msgstr "Typ meteo informací po startu"
 
 #
-#: ../ui.py:880
+#: ../ui.py:877
 msgid "UTC"
 msgstr "UTC"
 
@@ -309,155 +314,155 @@ msgid "VIS-IR Czech Republic"
 msgstr "VIS-IR Česká republika"
 
 #
-#: ../ui.py:104
+#: ../ui.py:102
 msgid "actual position"
 msgstr "aktuální pozice"
 
 #
-#: ../ui.py:101
+#: ../ui.py:99
 msgid "all frames"
 msgstr "všechny snímky"
 
 #
-#: ../ui.py:116
+#: ../ui.py:114
 msgid "all types"
 msgstr "všechny typy"
 
 #
-#: ../ui.py:104
+#: ../ui.py:102
 msgid "begin"
 msgstr "začátku"
 
 #
-#: ../ui.py:116
+#: ../ui.py:114
 msgid "current type"
 msgstr "aktuální typ"
 
-#: ../plugin.py:25
+#: ../plugin.py:30
 msgid "czech meteo information viewer"
 msgstr "prohlížeč meteo informací pro Českou republiku"
 
 #
-#: ../ui.py:288
+#: ../ui.py:285
 msgid "delete current frame"
 msgstr "odstranit aktuální snímek"
 
 #
-#: ../ui.py:101
+#: ../ui.py:99
 msgid "downloaded interval"
 msgstr "stahovaný interval"
 
 #
-#: ../ui.py:270 ../ui.py:281
+#: ../ui.py:267 ../ui.py:278
 msgid "exit plugin"
 msgstr "ukončit plugin"
 
 #
-#: ../ui.py:289
+#: ../ui.py:286
 msgid "go to first downloaded frame"
 msgstr "na první stažený snímek"
 
 #
-#: ../ui.py:290
+#: ../ui.py:287
 msgid "go to last downloaded frame"
 msgstr "na poslední stažený snímek"
 
 #
-#: ../ui.py:271
+#: ../ui.py:268
 msgid "go to last frame"
 msgstr "přejít na poslední snímek"
 
 #
-#: ../ui.py:278
+#: ../ui.py:275
 msgid "go to next frame"
 msgstr "následující snímek"
 
 #
-#: ../ui.py:277
+#: ../ui.py:274
 msgid "go to previous frame"
 msgstr "předchozí snímek"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "info"
 msgstr "informace"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "info and progress bar"
 msgstr "info a průběh prezentace"
 
 #
-#: ../ui.py:276
+#: ../ui.py:273
 msgid "menu"
 msgstr "výběr meteo informací"
 
 #
-#: ../ui.py:103 ../ui.py:116
+#: ../ui.py:101 ../ui.py:114
 msgid "no"
 msgstr "ne"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "none"
 msgstr "žádné"
 
 #
-#: ../ui.py:117
+#: ../ui.py:115
 msgid "older than downloaded interval"
 msgstr "starší než stahovaný interval"
 
 #
-#: ../ui.py:117
+#: ../ui.py:115
 msgid "older than max. interval"
 msgstr "starší než max. interval"
 
 #
-#: ../ui.py:285
+#: ../ui.py:282
 msgid "options"
 msgstr "nastavení"
 
 #
-#: ../ui.py:283
+#: ../ui.py:280
 msgid "play slideshow"
 msgstr "spustit prezentaci"
 
 #
-#: ../ui.py:282
+#: ../ui.py:279
 msgid "play/stop slideshow"
 msgstr "přehrát/zastavit prezentaci"
 
 #
-#: ../ui.py:114
+#: ../ui.py:112
 msgid "progress bar"
 msgstr "průběh prezentace"
 
 #
-#: ../ui.py:523
+#: ../ui.py:520
 msgid "refresh..."
 msgstr "refresh..."
 
 #
-#: ../ui.py:284
+#: ../ui.py:281
 msgid "run/abort download"
 msgstr "spustit/přerušit stahování"
 
 #
-#: ../ui.py:286
+#: ../ui.py:283
 msgid "stop slideshow/synaptic map"
 msgstr "zastavit prezentaci/synaptická mapa"
 
 #
-#: ../ui.py:279
+#: ../ui.py:276
 msgid "switch to next meteo type"
 msgstr "přepnout na další meteo typ"
 
 #
-#: ../ui.py:280
+#: ../ui.py:277
 msgid "switch to previous meteo type"
 msgstr "přepnout na předchozí meteo typ"
 
 #
-#: ../ui.py:287
+#: ../ui.py:284
 msgid "synaptic maps"
 msgstr "synaptické mapy"
