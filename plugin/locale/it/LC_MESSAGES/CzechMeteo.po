@@ -1,0 +1,379 @@
+# Signed-off-by: Dario Croci <spaeleus@croci.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: enigma2 OpenPLi - MeteoViewer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-30 09:59+0200\n"
+"PO-Revision-Date: 2013-02-06 17:54+0100\n"
+"Last-Translator: Spaeleus <spaeleus@croci.org>\n"
+"Language-Team: www.linsat.net <spaeleus@croci.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .../Extensions/MeteoViewer\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: Italy\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .../Extensions/MeteoViewer\n"
+
+#: ../ui.py:1247
+#, python-format
+msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
+msgstr ""
+
+#: ../ui.py:845 ../ui.py:849
+#, python-format
+msgid "%s of %s  -  %s"
+msgstr "%s di %s  -  %s"
+
+#: ../ui.py:70
+msgid ""
+"24h-MF - Vertically extensive cloudiness is depicted in dark red, thin cirrus clouds in dark blue, medium and low cloudiness in ocher, the lowest cloudiness transitions to green, terrain according to temperature to pink or blue, water surfaces to blue.\n"
+"\n"
+"  - RED, the more intense = vertically extensive cloudiness\n"
+"  - GREEN = low cloudiness formed by small droplets\n"
+"  - BLUE, the more intense = warmer object"
+msgstr ""
+
+#: ../ui.py:49
+msgid "24h-MF Czech Republic"
+msgstr ""
+
+#: ../ui.py:487
+msgid "Abort"
+msgstr "Annullare"
+
+#: ../ui.py:1188
+msgid "After download \"All\" switch to"
+msgstr "Su download completo, passare a"
+
+#: ../ui.py:50
+msgid "All"
+msgstr ""
+
+#: ../ui.py:889
+msgid "Are You sure delete this frame?"
+msgstr "Rimuovere il frame?"
+
+#: ../ui.py:485
+msgid "Back"
+msgstr ""
+
+#: ../ui.py:309 ../ui.py:513 ../ui.py:1168
+msgid "Cancel"
+msgstr "Annullare"
+
+#: ../ui.py:49
+msgid "Czech Radar"
+msgstr ""
+
+#: ../ui.py:49
+msgid "Czech Storm"
+msgstr ""
+
+#: ../ui.py:266 ../ui.py:386 ../ui.py:458
+msgid "CzechMeteo"
+msgstr ""
+
+#: ../ui.py:1164 ../ui.py:1221
+msgid "CzechMeteo Setup"
+msgstr "Impostazioni CzechMeteo"
+
+#: ../ui.py:1194
+msgid "Delay frame release for weatheronline"
+msgstr ""
+
+#: ../ui.py:1189
+msgid "Delete old files before download"
+msgstr "Rim. vecchi file prima del download"
+
+#: ../ui.py:1178
+msgid "Directory for download"
+msgstr "Directory per il download"
+
+#: ../ui.py:1182
+msgid "Display"
+msgstr "Mostrare"
+
+#: ../ui.py:311 ../ui.py:515 ../ui.py:794
+msgid "Download"
+msgstr "Download"
+
+#: ../ui.py:1186
+msgid "Download info on plugin's start"
+msgstr "Download info all'avvio del plugin"
+
+#: ../ui.py:623 ../ui.py:673 ../ui.py:695
+msgid "Download pictures, please!"
+msgstr "Scaricare le immagini."
+
+#: ../ui.py:493
+msgid "Download:"
+msgstr "Download:"
+
+#: ../ui.py:1181
+msgid "Downloaded interval"
+msgstr "Intervallo considerato"
+
+#: ../ui.py:920
+msgid "Erase files..."
+msgstr "Rimuovere file..."
+
+#: ../ui.py:1191
+msgid "Frames info"
+msgstr "Info frame"
+
+#: ../ui.py:57
+msgid ""
+"IR - Traditional display\n"
+"\n"
+"  - DARK - warm areas\n"
+"  - LIGHT - cold areas"
+msgstr ""
+
+#: ../ui.py:49
+msgid "IR BT Czech Republic"
+msgstr ""
+
+#: ../ui.py:49
+msgid "IR Central Europe"
+msgstr ""
+
+#: ../ui.py:65
+#, python-format
+msgid ""
+"IR-BT - Traditional display (color scale is embedded in individual images)\n"
+"\n"
+"  - DARK = warm areas\n"
+"  - LIGHT = cold areas\n"
+"  - PURPLE = -33%sC (240 K)\n"
+"  - RED = -73%sC (200 K)"
+msgstr ""
+
+#: ../ui.py:878
+msgid "LT"
+msgstr "LT"
+
+#: ../ui.py:1192
+msgid "Local time in info"
+msgstr "Ora locale nelle info"
+
+#: ../ui.py:1228
+msgid "Location for CzechMeteo"
+msgstr "Località per CzechMeteo"
+
+#: ../ui.py:584 ../ui.py:715 ../ui.py:735 ../ui.py:803 ../ui.py:841
+#: ../ui.py:891
+msgid "No files found!"
+msgstr "Nessun file trovato."
+
+#: ../ui.py:1190
+msgid "On exit delete files"
+msgstr "Rimuovere files all'uscita"
+
+#: ../ui.py:312 ../ui.py:516 ../ui.py:795
+msgid "Options"
+msgstr "Impostazioni"
+
+#: ../ui.py:1193
+msgid "Parallels and meridians"
+msgstr "Paralleli e meridiani"
+
+#: ../ui.py:472
+msgid "Prepare..."
+msgstr "Preparazione..."
+
+#: ../ui.py:75
+msgid ""
+"Radar information\n"
+"\n"
+"  - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"
+msgstr ""
+
+#: ../ui.py:1184
+msgid "Refresh slideshow"
+msgstr "Aggiornare la proiezione"
+
+#: ../ui.py:1167
+msgid "Save"
+msgstr "Salvare"
+
+#: ../ui.py:406
+msgid "Select info type:"
+msgstr "Selezionare il tipo desiderato:"
+
+#: ../ui.py:514 ../ui.py:572 ../ui.py:793
+msgid "Slideshow"
+msgstr "Proiezione"
+
+#: ../ui.py:1185
+msgid "Slideshow begins from"
+msgstr "Iniziare la proiezione da"
+
+#: ../ui.py:1183
+msgid "Slideshow's step"
+msgstr "Passo proiezione"
+
+#: ../ui.py:783
+msgid "Stop Show"
+msgstr "Stop"
+
+#: ../ui.py:500 ../ui.py:713 ../ui.py:733
+msgid "Stop slideshow, please!"
+msgstr "Arrestare la proiezione"
+
+#: ../ui.py:74
+msgid "Storm detection"
+msgstr ""
+
+#: ../ui.py:1187 ../ui.py:1247
+msgid "Type of meteo info on start"
+msgstr "Tipologia info meteo all'avvio"
+
+#: ../ui.py:880
+msgid "UTC"
+msgstr "UTC"
+
+#: ../ui.py:60
+msgid ""
+"VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n"
+"\n"
+"  - YELLOWISH = low to medium cloudiness (generally warmer)\n"
+"  - WHITE to BLUE = high cloudiness (cold)\n"
+"  - GREEN = vegetation-covered terrain\n"
+"  - DARK BLUE = water"
+msgstr ""
+
+#: ../ui.py:49
+msgid "VIS-IR Czech Republic"
+msgstr ""
+
+#: ../ui.py:104
+msgid "actual position"
+msgstr "Posizione attuale"
+
+#: ../ui.py:101
+msgid "all frames"
+msgstr "Tutti i frame"
+
+#: ../ui.py:116
+msgid "all types"
+msgstr "Tutti"
+
+#: ../ui.py:104
+msgid "begin"
+msgstr "Inizio"
+
+#: ../ui.py:116
+msgid "current type"
+msgstr "Tipo corrente"
+
+#: ../plugin.py:25
+msgid "czech meteo information viewer"
+msgstr ""
+
+#: ../ui.py:288
+msgid "delete current frame"
+msgstr "Rimuovere il frame corrente"
+
+#: ../ui.py:101
+msgid "downloaded interval"
+msgstr "Intervallo considerato"
+
+#: ../ui.py:270 ../ui.py:281
+msgid "exit plugin"
+msgstr "Uscire"
+
+#: ../ui.py:289
+msgid "go to first downloaded frame"
+msgstr "Andare al primo frame scaricato"
+
+#: ../ui.py:290
+msgid "go to last downloaded frame"
+msgstr "Andare all'iltimo frame scaricato"
+
+#: ../ui.py:271
+msgid "go to last frame"
+msgstr "Andare all'ultimo frame"
+
+#: ../ui.py:278
+msgid "go to next frame"
+msgstr "Andare al frame successivo"
+
+#: ../ui.py:277
+msgid "go to previous frame"
+msgstr "Andare al frame precedente"
+
+#: ../ui.py:114
+msgid "info"
+msgstr "info"
+
+#: ../ui.py:114
+msgid "info and progress bar"
+msgstr "Info e barra di progressione"
+
+#: ../ui.py:276
+msgid "menu"
+msgstr "Menu"
+
+#: ../ui.py:116
+msgid "no"
+msgstr "No"
+
+#: ../ui.py:114
+msgid "none"
+msgstr "Nessuno"
+
+#: ../ui.py:117
+msgid "older than downloaded interval"
+msgstr "Più vecchi dell'intervallo considerato"
+
+#: ../ui.py:117
+msgid "older than max. interval"
+msgstr "Più vecchi dell'intervallo max"
+
+#: ../ui.py:285
+msgid "options"
+msgstr "Opzioni"
+
+#: ../ui.py:283
+#, fuzzy
+msgid "play slideshow"
+msgstr "Proiezione: Play/Stop"
+
+#: ../ui.py:282
+msgid "play/stop slideshow"
+msgstr "Proiezione: Play/Stop"
+
+#: ../ui.py:114
+msgid "progress bar"
+msgstr "Barra di progressione"
+
+#: ../ui.py:523
+msgid "refresh..."
+msgstr "Aggiornamento..."
+
+#: ../ui.py:284
+msgid "run/abort download"
+msgstr "Download: Avvio/Arresto"
+
+#: ../ui.py:286
+msgid "stop slideshow/synaptic map"
+msgstr "Arrestare proiezione/Mappa sinottica"
+
+#: ../ui.py:279
+msgid "switch to next meteo type"
+msgstr "Passare al tipo successivo"
+
+#: ../ui.py:280
+msgid "switch to previous meteo type"
+msgstr "Passare al tipo precedente"
+
+#
+#: ../ui.py:287
+msgid "synaptic maps"
+msgstr "Mappa sinottica"
