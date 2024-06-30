@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2024
-VERSION = "ims (c) 2012-2024 v2.00"
+VERSION = "ims (c) 2012-2024 v2.01"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -121,7 +121,6 @@ config.plugins.czechmeteo.mer = ConfigYesNo(default=False)
 choicelist = []
 for i in range(16, 65):
 	choicelist.append(("%d" % i, "%s mins" % i))
-config.plugins.czechmeteo.wo_releaseframe_delay = ConfigSelection(default="47", choices=choicelist)
 cfg = config.plugins.czechmeteo
 
 TMPDIR = cfg.tmpdir.value
@@ -1191,7 +1190,6 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Frames info"), cfg.display))
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
-		cfgList.append(getConfigListEntry(_("Delay frame release for weatheronline"), cfg.wo_releaseframe_delay))
 
 		cfgList.append(self.tmpdir_entry)
 		ConfigListScreen.__init__(self, cfgList, session, on_change=self.changedEntry)
