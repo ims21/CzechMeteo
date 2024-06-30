@@ -2,7 +2,7 @@ from distutils.core import setup
 import setup_translate
 
 pkg = 'Extensions.CzechMeteo'
-setup (name = 'enigma2-plugin-extensions-czechmeteo,
+setup (name = 'enigma2-plugin-extensions-czechmeteo',
 	version = '2.0.0',
 	description = 'czech meteo information viewer',
 	packages = [pkg],
