@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2024
-VERSION = "ims (c) 2012-2024 v2.02"
+VERSION = "ims (c) 2012-2024 v2.03"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -45,12 +45,12 @@ import requests
 TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
-# LIST OF USED NAMES IN MENU,OPTIONS AS INFO ("All" must be at last)
-INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("Czech Storm"), _("Czech Radar")]
+# LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
+INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
-TYPE = ["ir", "vis", "bt", "24m", "storm", "csr"]
+TYPE = ["ir", "vis", "bt", "24m", "eu", "storm", "csr"]
 TYPE += ["all"]
 
 DESCR = [
@@ -71,6 +71,9 @@ _("24h-MF - Vertically extensive cloudiness is depicted in dark red, thin cirrus
   - RED, the more intense = vertically extensive cloudiness\n\
   - GREEN = low cloudiness formed by small droplets\n\
   - BLUE, the more intense = warmer object"),
+_("IR - Traditional display\n\n\
+  - DARK - warm areas\n\
+  - LIGHT - cold areas"),
 _("Storm detection"),
 _("Radar information\n\n\
   - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"),
@@ -85,10 +88,10 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
-BACKGROUND = ["bg.png", "2bg.png", "2bg.png", "2bg.png", "e.png", "radar.png"]
+BACKGROUND = ["bg.png", "2bg.png", "2bg.png", "2bg.png", "bgeu.png", "e.png", "radar.png"]
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
-MER = ["merce.png", "mercz.png", "mercz.png", "mercz.png", "estorm.png"]
+MER = ["merce.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "estorm.png"]
 for i in range(0, len(TYPE) + 1):
 	MER.append("e.png")
 EMPTYFRAME = "e.jpg"
@@ -397,7 +400,7 @@ class czechMeteo(Screen, HelpableScreen):
 			return
 		menu = []
 		self.mainMenu = True
-		for i in range(0, 6):
+		for i in range(0, len(TYPE)-1):
 			print(INFO[i], TYPE[i])
 			menu.append((INFO[i], TYPE[i]))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select info type:"), list=menu)
@@ -749,7 +752,7 @@ class czechMeteo(Screen, HelpableScreen):
 			else:
 				self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
 				if cfg.mer.value:
-					if TYPE[self.typ] in ("ir", "vis", "bt", "24m", "storm") and fileExists(E2PATH + MER[self.typ]):
+					if TYPE[self.typ] in ("eu", "ir", "vis", "bt", "24m", "storm") and fileExists(E2PATH + MER[self.typ]):
 						self.merLoad.startDecode(E2PATH + MER[self.typ])
 					else:
 						self.merLoad.startDecode(PPATH + MER[self.typ])
@@ -932,7 +935,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if not self.refreshLast:  # dont read if refresh
 				self.downloadOnce(typ)
 
-		if typ in ("ir", "vis", "bt", "24m", "csr", "all"):
+		if typ in ("eu", "ir", "vis", "bt", "24m", "csr", "all"):
 			if not self.stopRead:
 				self.downloadMain(typ)
 		if typ in ("storm", "all"):
@@ -1043,7 +1046,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if cfg.delete.value == "3":
 				startDel = now15 - int(cfg.nr.choices[len(cfg.nr.choices) - 1]) * 900
 			if typ == "all":
-				for i in ("ir", "vis", "bt", "24m", "csr"):
+				for i in ("eu", "ir", "vis", "bt", "24m", "csr"):
 					self.deleteOldFiles(i, gmtime(startDel))
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
@@ -1051,6 +1054,11 @@ class czechMeteo(Screen, HelpableScreen):
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
+			if typ == "eu" or typ == "all":
+				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgeu-1160x800-ir108/msgeu-1160x800.ir108.%s.%s.0.jpg" % (frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("eu")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
 			if typ == "ir" or typ == "all":
 				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgce-ir/msgce.ir.%s.%s.0.jpg" % (frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ir")), frDate, frTime)

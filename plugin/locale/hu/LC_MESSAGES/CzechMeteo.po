@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 OpenPLi - MeteoViewer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-30 13:19+0200\n"
+"POT-Creation-Date: 2024-09-12 07:44+0200\n"
 "PO-Revision-Date: 2018-07-27 17:54+0100\n"
 "Last-Translator: chipcard <github.com/chipcard>\n"
 "Language-Team: cpteam <github.com/chipcard>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .../Extensions/MeteoViewer\n"
 
-#: ../ui.py:1243
+#: ../ui.py:1251
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr "!!! '%s' az 'Összes' nem használható a '/tmp/' !!!"
 
-#: ../ui.py:842 ../ui.py:846
+#: ../ui.py:845 ../ui.py:849
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr "%s of %s  -  %s"
@@ -41,11 +41,11 @@ msgstr ""
 msgid "24h-MF Czech Republic"
 msgstr ""
 
-#: ../ui.py:484
+#: ../ui.py:487
 msgid "Abort"
 msgstr "Abort"
 
-#: ../ui.py:1186
+#: ../ui.py:1194
 msgid "After download \"All\" switch to"
 msgstr "A letöltés után \"Minden\" váltson"
 
@@ -53,15 +53,15 @@ msgstr "A letöltés után \"Minden\" váltson"
 msgid "All"
 msgstr ""
 
-#: ../ui.py:886
+#: ../ui.py:889
 msgid "Are You sure delete this frame?"
 msgstr "Biztosan törli ezt a képkockát?"
 
-#: ../ui.py:482
+#: ../ui.py:485
 msgid "Back"
 msgstr ""
 
-#: ../ui.py:306 ../ui.py:510 ../ui.py:1165
+#: ../ui.py:309 ../ui.py:513 ../ui.py:1173
 msgid "Cancel"
 msgstr "Mégsem"
 
@@ -78,55 +78,55 @@ msgstr ""
 msgid "Czech Storm"
 msgstr ""
 
-#: ../ui.py:263 ../ui.py:383 ../ui.py:455
+#: ../ui.py:266 ../ui.py:386 ../ui.py:458
 msgid "CzechMeteo"
 msgstr ""
 
-#: ../ui.py:1161 ../ui.py:1217
+#: ../ui.py:1169 ../ui.py:1225
 msgid "CzechMeteo Setup"
 msgstr "CzechMeteo telepítése"
 
-#: ../ui.py:1187
+#: ../ui.py:1195
 msgid "Delete old files before download"
 msgstr "Törölje a régi fájlokat letöltés előtt"
 
-#: ../ui.py:1175
+#: ../ui.py:1183
 msgid "Directory for download"
 msgstr "Letöltési könyvtár"
 
-#: ../ui.py:1180
+#: ../ui.py:1188
 msgid "Display"
 msgstr "Képernyő"
 
-#: ../ui.py:308 ../ui.py:512 ../ui.py:791
+#: ../ui.py:311 ../ui.py:515 ../ui.py:794
 msgid "Download"
 msgstr "Letöltés"
 
-#: ../ui.py:1184
+#: ../ui.py:1192
 msgid "Download info on plugin's start"
 msgstr "Töltse le a plugin információit"
 
-#: ../ui.py:620 ../ui.py:670 ../ui.py:692
+#: ../ui.py:623 ../ui.py:673 ../ui.py:695
 msgid "Download pictures, please!"
 msgstr "Képek letöltése, kérem!"
 
-#: ../ui.py:490
+#: ../ui.py:493
 msgid "Download:"
 msgstr "Letöltés:"
 
-#: ../ui.py:1179
+#: ../ui.py:1187
 msgid "Downloaded interval"
 msgstr "Letöltött intervallum"
 
-#: ../ui.py:917
+#: ../ui.py:920
 msgid "Erase files..."
 msgstr "Fájlok törlése ..."
 
-#: ../ui.py:1189
+#: ../ui.py:1197
 msgid "Frames info"
 msgstr "Képkocka info"
 
-#: ../ui.py:57
+#: ../ui.py:57 ../ui.py:74
 msgid ""
 "IR - Traditional display\n"
 "\n"
@@ -142,6 +142,10 @@ msgstr ""
 msgid "IR Central Europe"
 msgstr ""
 
+#: ../ui.py:49
+msgid "IR Europe"
+msgstr ""
+
 #: ../ui.py:65
 #, python-format
 msgid ""
@@ -153,91 +157,91 @@ msgid ""
 "  - RED = -73%sC (200 K)"
 msgstr ""
 
-#: ../ui.py:875
+#: ../ui.py:878
 msgid "LT"
 msgstr "LT"
 
-#: ../ui.py:1190
+#: ../ui.py:1198
 msgid "Local time in info"
 msgstr "Helyi idő az info"
 
-#: ../ui.py:1224
+#: ../ui.py:1232
 msgid "Location for CzechMeteo"
 msgstr "Hely megadása CzechMeteoViewernek"
 
-#: ../ui.py:581 ../ui.py:712 ../ui.py:732 ../ui.py:800 ../ui.py:838
-#: ../ui.py:888
+#: ../ui.py:584 ../ui.py:715 ../ui.py:735 ../ui.py:803 ../ui.py:841
+#: ../ui.py:891
 msgid "No files found!"
 msgstr "Nincsenek fájlok!"
 
-#: ../ui.py:1188
+#: ../ui.py:1196
 msgid "On exit delete files"
 msgstr "Kilépéskor törölje a fájlokat"
 
-#: ../ui.py:309 ../ui.py:513 ../ui.py:792
+#: ../ui.py:312 ../ui.py:516 ../ui.py:795
 msgid "Options"
 msgstr "opciók"
 
-#: ../ui.py:1191
+#: ../ui.py:1199
 msgid "Parallels and meridians"
 msgstr "Párhuzamok és meridiánok"
 
-#: ../ui.py:469
+#: ../ui.py:472
 msgid "Prepare..."
 msgstr "Készít..."
 
-#: ../ui.py:75
+#: ../ui.py:78
 msgid ""
 "Radar information\n"
 "\n"
 "  - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"
 msgstr ""
 
-#: ../ui.py:1182
+#: ../ui.py:1190
 msgid "Refresh slideshow"
 msgstr "Diavetítés frissítése"
 
-#: ../ui.py:1178
+#: ../ui.py:1186
 msgid "Run from 'Extended' menu"
 msgstr ""
 
-#: ../ui.py:1164
+#: ../ui.py:1172
 msgid "Save"
 msgstr "Mentés"
 
-#: ../ui.py:403
+#: ../ui.py:406
 msgid "Select info type:"
 msgstr "Válassza ki a kívánt időjárás típusát:"
 
-#: ../ui.py:511 ../ui.py:569 ../ui.py:790
+#: ../ui.py:514 ../ui.py:572 ../ui.py:793
 msgid "Slideshow"
 msgstr "Diavetítés"
 
-#: ../ui.py:1183
+#: ../ui.py:1191
 msgid "Slideshow begins from"
 msgstr "A diavetítés kezdődik"
 
-#: ../ui.py:1181
+#: ../ui.py:1189
 msgid "Slideshow's step"
 msgstr "Diavetítés léptetése"
 
-#: ../ui.py:780
+#: ../ui.py:783
 msgid "Stop Show"
 msgstr "Leállítás"
 
-#: ../ui.py:497 ../ui.py:710 ../ui.py:730
+#: ../ui.py:500 ../ui.py:713 ../ui.py:733
 msgid "Stop slideshow, please!"
 msgstr "Állítsa le a diavetítést, kérem!"
 
-#: ../ui.py:74
+#: ../ui.py:77
 msgid "Storm detection"
 msgstr ""
 
-#: ../ui.py:1185 ../ui.py:1243
+#: ../ui.py:1193 ../ui.py:1251
 msgid "Type of meteo info on start"
 msgstr "Kezdés meteo információ típusa"
 
-#: ../ui.py:877
+#: ../ui.py:880
 msgid "UTC"
 msgstr "UTC"
 
@@ -255,23 +259,23 @@ msgstr ""
 msgid "VIS-IR Czech Republic"
 msgstr ""
 
-#: ../ui.py:102
+#: ../ui.py:105
 msgid "actual position"
 msgstr "tényleges pozíció"
 
-#: ../ui.py:99
+#: ../ui.py:102
 msgid "all frames"
 msgstr "minden képkocka"
 
-#: ../ui.py:114
+#: ../ui.py:117
 msgid "all types"
 msgstr "minden típus"
 
-#: ../ui.py:102
+#: ../ui.py:105
 msgid "begin"
 msgstr "kezdődik"
 
-#: ../ui.py:114
+#: ../ui.py:117
 msgid "current type"
 msgstr "jelenlegi típus"
 
@@ -279,102 +283,102 @@ msgstr "jelenlegi típus"
 msgid "czech meteo information viewer"
 msgstr ""
 
-#: ../ui.py:285
+#: ../ui.py:288
 msgid "delete current frame"
 msgstr "törölje az aktuális képkockát"
 
-#: ../ui.py:99
+#: ../ui.py:102
 msgid "downloaded interval"
 msgstr "letöltött intervallum"
 
-#: ../ui.py:267 ../ui.py:278
+#: ../ui.py:270 ../ui.py:281
 msgid "exit plugin"
 msgstr "Kilépés a pluginból"
 
-#: ../ui.py:286
+#: ../ui.py:289
 msgid "go to first downloaded frame"
 msgstr "menj az első letöltött képkockára"
 
-#: ../ui.py:287
+#: ../ui.py:290
 msgid "go to last downloaded frame"
 msgstr "menj az utolsó letöltött képkockára"
 
-#: ../ui.py:268
+#: ../ui.py:271
 msgid "go to last frame"
 msgstr "menj az utolsó képkockára"
 
-#: ../ui.py:275
+#: ../ui.py:278
 msgid "go to next frame"
 msgstr "menj a következő képkockára"
 
-#: ../ui.py:274
+#: ../ui.py:277
 msgid "go to previous frame"
 msgstr "ugrás az előző képkockára"
 
-#: ../ui.py:112
+#: ../ui.py:115
 msgid "info"
 msgstr "infó"
 
-#: ../ui.py:112
+#: ../ui.py:115
 msgid "info and progress bar"
 msgstr "info és progress bar"
 
-#: ../ui.py:273
+#: ../ui.py:276
 msgid "menu"
 msgstr "menü"
 
-#: ../ui.py:101 ../ui.py:114
+#: ../ui.py:104 ../ui.py:117
 msgid "no"
 msgstr "nem"
 
-#: ../ui.py:112
+#: ../ui.py:115
 msgid "none"
 msgstr "egyik sem"
 
-#: ../ui.py:115
+#: ../ui.py:118
 msgid "older than downloaded interval"
 msgstr "régebbi, mint a letöltött intervallum"
 
-#: ../ui.py:115
+#: ../ui.py:118
 msgid "older than max. interval"
 msgstr "régebbi, mint max. intervallum"
 
-#: ../ui.py:282
+#: ../ui.py:285
 msgid "options"
 msgstr "options"
 
-#: ../ui.py:280
+#: ../ui.py:283
 msgid "play slideshow"
 msgstr "diavetítés lejátszása"
 
-#: ../ui.py:279
+#: ../ui.py:282
 msgid "play/stop slideshow"
 msgstr "diavetítés lejátszása/leállítása"
 
-#: ../ui.py:112
+#: ../ui.py:115
 msgid "progress bar"
 msgstr ""
 
-#: ../ui.py:520
+#: ../ui.py:523
 msgid "refresh..."
 msgstr "Frissítés..."
 
-#: ../ui.py:281
+#: ../ui.py:284
 msgid "run/abort download"
 msgstr "futás/megszakítás letöltés"
 
-#: ../ui.py:283
+#: ../ui.py:286
 msgid "stop slideshow/synaptic map"
 msgstr "stop diavetítés / szinaptikus térkép"
 
-#: ../ui.py:276
+#: ../ui.py:279
 msgid "switch to next meteo type"
 msgstr "váltson a következő meteorológiai típusra"
 
-#: ../ui.py:277
+#: ../ui.py:280
 msgid "switch to previous meteo type"
 msgstr "váltson az előző meteorológiai típusra"
 
-#: ../ui.py:284
+#: ../ui.py:287
 msgid "synaptic maps"
 msgstr "szinaptikus térképek"
