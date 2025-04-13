@@ -4,8 +4,8 @@ from . import _
 #
 #  Czech Meteo Viewer - Plugin E2
 #
-#  by ims (c) 2011-2024
-VERSION = "ims (c) 2012-2024 v2.03"
+#  by ims (c) 2011-2025
+VERSION = "ims (c) 2012-2025 v2.04"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -1051,34 +1051,40 @@ class czechMeteo(Screen, HelpableScreen):
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
 
+		eu = "msgeu-1160x800"
+		ce = "msgce-1160x800"
+		cz = "msgcz-1160x800"
+		page = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit"
+
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
+
 			if typ == "eu" or typ == "all":
-				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgeu-1160x800-ir108/msgeu-1160x800.ir108.%s.%s.0.jpg" % (frDate, frTime)
+				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, eu, eu, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("eu")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "ir" or typ == "all":
-				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgce-ir/msgce.ir.%s.%s.0.jpg" % (frDate, frTime)
+				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, ce, ce, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ir")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
 			if typ == "vis" or typ == "all":
-				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgcz-vis-ir/msgcz.vis-ir.%s.%s.0.jpg" % (frDate, frTime)
+				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("vis")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
 			if typ == "bt" or typ == "all":
-				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgcz-BT/msgcz.BT.%s.%s.0.jpg" % (frDate, frTime)
+				url = "%s/img-%s-ir108BT/%s.ir108BT.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("bt")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
 			if typ == "24m" or typ == "all":
-				url = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit/img-msgcz-24M/msgcz.24M.%s.%s.0.jpg" % (frDate, frTime)
+				url = "%s/img-%s-24M/%s.24M.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("24m")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
