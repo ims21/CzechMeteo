@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2025
-VERSION = "ims (c) 2012-2025 v2.04"
+VERSION = "ims (c) 2012-2025 v2.06"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -46,11 +46,11 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
+INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("WV Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
-TYPE = ["ir", "vis", "bt", "24m", "eu", "storm", "csr"]
+TYPE = ["ir", "vis", "wv", "bt", "24m", "eu", "storm", "csr"]
 TYPE += ["all"]
 
 DESCR = [
@@ -62,6 +62,10 @@ _("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n
   - WHITE to BLUE = high cloudiness (cold)\n\
   - GREEN = vegetation-covered terrain\n\
   - DARK BLUE = water"),
+_("WV - spectral band of water vapor absorption (channel WV 6.2)\n\n\
+  - DARK shades correspond to dry and cloud-free upper troposphere\n\
+  - LIGHTER the shade, the more water vapor is present in that layer\n\
+  This spectral channel also captures the highest cloud tops - cirrus and cumulonimbus clouds (shown in white), but not medium or low cloudiness."),
 _("IR-BT - Traditional display (color scale is embedded in individual images)\n\n\
   - DARK = warm areas\n\
   - LIGHT = cold areas\n\
@@ -88,10 +92,10 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
-BACKGROUND = ["bg.png", "2bg.png", "2bg.png", "2bg.png", "bgeu.png", "e.png", "radar.png"]
+BACKGROUND = ["bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "e.png", "radar.png"]
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
-MER = ["merce.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "estorm.png"]
+MER = ["merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "estorm.png"]
 for i in range(0, len(TYPE) + 1):
 	MER.append("e.png")
 EMPTYFRAME = "e.jpg"
@@ -111,7 +115,7 @@ for i in range(0, len(INFO)):
 config.plugins.czechmeteo.type = ConfigSelection(default="5", choices=choicelist)
 
 # CHOICES FOR AFTER "ALL" (WITHOUT "ALL"):
-config.plugins.czechmeteo.typeafterall = ConfigSelection(default="5", choices=config.plugins.czechmeteo.type.choices[:-1])
+config.plugins.czechmeteo.typeafterall = ConfigSelection(default="6", choices=config.plugins.czechmeteo.type.choices[:-1])
 config.plugins.czechmeteo.display = ConfigSelection(default="3", choices=[("0", _("none")), ("1", _("info")), ("2", _("progress bar")), ("3", _("info and progress bar"))])
 config.plugins.czechmeteo.localtime = ConfigYesNo(default=False)
 config.plugins.czechmeteo.delete = ConfigSelection(default="4", choices=[("0", _("no")), ("1", _("current type")), ("2", _("all types")),
@@ -752,7 +756,7 @@ class czechMeteo(Screen, HelpableScreen):
 			else:
 				self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
 				if cfg.mer.value:
-					if TYPE[self.typ] in ("eu", "ir", "vis", "bt", "24m", "storm") and fileExists(E2PATH + MER[self.typ]):
+					if TYPE[self.typ] in ("eu", "ir", "vis", "wv", "bt", "24m", "storm") and fileExists(E2PATH + MER[self.typ]):
 						self.merLoad.startDecode(E2PATH + MER[self.typ])
 					else:
 						self.merLoad.startDecode(PPATH + MER[self.typ])
@@ -935,7 +939,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if not self.refreshLast:  # dont read if refresh
 				self.downloadOnce(typ)
 
-		if typ in ("eu", "ir", "vis", "bt", "24m", "csr", "all"):
+		if typ in ("eu", "ir", "vis", "wv", "bt", "24m", "csr", "all"):
 			if not self.stopRead:
 				self.downloadMain(typ)
 		if typ in ("storm", "all"):
@@ -1074,6 +1078,11 @@ class czechMeteo(Screen, HelpableScreen):
 			if typ == "vis" or typ == "all":
 				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("vis")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
+			if typ == "wv" or typ == "all":
+				url = "%s/img-%s-wv062/%s.wv062.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("wv")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
