@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2025
-VERSION = "ims (c) 2012-2025 v2.06"
+VERSION = "v2.07 (ims 2011-2025)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -29,6 +29,7 @@ from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Sources.List import List
 from enigma import eTimer
 from Components.config import ConfigSubsection, ConfigYesNo, ConfigText, ConfigDirectory, ConfigSelection, getConfigListEntry, config
 from Components.Label import Label
@@ -102,6 +103,11 @@ EMPTYFRAME = "e.jpg"
 
 RADAR_MM = "radar_mm.png"
 
+HOME = ["homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "estorm.png"]
+for i in range(0, len(TYPE) + 1):
+	HOME.append("e.png")
+HOME_CSR = "homecsr.png"
+
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
 config.plugins.czechmeteo.frames = ConfigSelection(default="0", choices=[("0", _("downloaded interval")), ("1", _("all frames"))])
 config.plugins.czechmeteo.time = ConfigSelection(default="750", choices=[("400", "400 ms"), ("500", "500 ms"), ("600", "600 ms"), ("750", "750 ms"), ("1000", "1s"), ("2000", "2s"), ("5000", "5s"), ("10000", "10s")])
@@ -123,6 +129,8 @@ config.plugins.czechmeteo.delete = ConfigSelection(default="4", choices=[("0", _
 config.plugins.czechmeteo.delend = ConfigYesNo(default=True)
 config.plugins.czechmeteo.tmpdir = ConfigDirectory(TMPDIR)
 config.plugins.czechmeteo.mer = ConfigYesNo(default=False)
+config.plugins.czechmeteo.home = ConfigYesNo(default=False)
+
 choicelist = []
 for i in range(16, 65):
 	choicelist.append(("%d" % i, "%s mins" % i))
@@ -219,6 +227,7 @@ class czechMeteo(Screen, HelpableScreen):
 			<widget name="border" position="%s,%s" zPosition="2" size="%s,%s" alphatest="on"/>
 			<widget name="mer" position="%s,%s" zPosition="3" size="%s,%s" alphatest="on"/>
 			<widget name="frames" position="%s,%s" zPosition="1" size="%s,%s" alphatest="on"/>
+			<widget name="home" position="%s,%s" zPosition="1" size="%s,%s" alphatest="on"/>
 
 			<ePixmap position="  0,0" size="160,30" pixmap="%s%s" zPosition="2" alphatest="blend" />
 			<ePixmap position="160,0" size="160,30" pixmap="%s%s" zPosition="2" alphatest="blend" />
@@ -247,6 +256,7 @@ class czechMeteo(Screen, HelpableScreen):
 			<widget name="slide" position="%s,%s" zPosition="5" borderWidth="0" size="210,6" backgroundColor="dark" />
 
 		</screen>""" % (cx, cy, sx, sy, bgcolor,
+				px, py, pw, ph,
 				px, py, pw, ph,
 				px, py, pw, ph,
 				px, py, pw, ph,
@@ -307,6 +317,10 @@ class czechMeteo(Screen, HelpableScreen):
 		self.merLoad = enigma.ePicLoad()
 		self.merLoad.PictureData.get().append(self.showMerPic)
 
+		self["home"] = Pixmap()
+		self.homeLoad = enigma.ePicLoad()
+		self.homeLoad.PictureData.get().append(self.showHomePic)
+
 		self["msg"] = Label()
 		self["description"] = Label()
 
@@ -364,6 +378,8 @@ class czechMeteo(Screen, HelpableScreen):
 		self.borderLoad.setPara(par)
 		par = [self["mer"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
 		self.merLoad.setPara(par)
+		par = [self["home"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
+		self.homeLoad.setPara(par)
 
 	def showPic(self, picInfo=None):
 		ptr = self.picload.getData()
@@ -382,6 +398,12 @@ class czechMeteo(Screen, HelpableScreen):
 		if ptr != None:
 			self["mer"].instance.setPixmap(ptr.__deref__())
 			self["mer"].show()
+
+	def showHomePic(self, picInfo=None):
+		ptr = self.homeLoad.getData()
+		if ptr != None:
+			self["home"].instance.setPixmap(ptr.__deref__())
+			self["home"].show()
 
 	def getDir(self, num_typ):
 		return TMPDIR + SUBDIR + "/" + TYPE[num_typ] + "/"
@@ -753,15 +775,22 @@ class czechMeteo(Screen, HelpableScreen):
 					self.merLoad.startDecode(E2PATH + RADAR_MM)
 				else:
 					self.merLoad.startDecode(PPATH + RADAR_MM)
+				if cfg.home.value and fileExists(E2PATH + HOME_CSR):
+					self.homeLoad.startDecode(E2PATH + HOME_CSR)
 			else:
 				self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
-				if cfg.mer.value:
-					if TYPE[self.typ] in ("eu", "ir", "vis", "wv", "bt", "24m", "storm") and fileExists(E2PATH + MER[self.typ]):
-						self.merLoad.startDecode(E2PATH + MER[self.typ])
-					else:
-						self.merLoad.startDecode(PPATH + MER[self.typ])
+				if cfg.mer.value: # paralel an meridians
+					self.merLoad.startDecode(PPATH + MER[self.typ])
 				else:
 					self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
+
+				if cfg.home.value: # home position
+					if TYPE[self.typ] in ("eu", "ir", "vis", "wv", "bt", "24m", "storm") and fileExists(E2PATH + HOME[self.typ]):
+						self.homeLoad.startDecode(E2PATH + HOME[self.typ])
+					else:
+						self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
+				else:
+					self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 
 	def slideShow(self):
 		self.isSynaptic = False
@@ -1180,13 +1209,13 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.skinName = ["meteoViewerCfg", "czechMeteoCfg"]
-		self.setup_title = _("CzechMeteo Setup")
-		self.version = VERSION
+		self.skinName = "Setup"
+		self.setup_title = "%s - %s" % (_("CzechMeteo Setup"), VERSION)
 
 		self["key_green"] = Label(_("Save"))
 		self["key_red"] = Label(_("Cancel"))
-		self["statusbar"] = Label(self.version)
+		self["description"] = Label()
+
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"green": self.save,
@@ -1197,6 +1226,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 
 		self.tmpdir_entry = getConfigListEntry(_("Directory for download"), cfg.tmpdir)
 
+		self["config"] = List()
 		cfgList = []
 		cfgList.append(getConfigListEntry(_("Run from 'Extended' menu"), cfg.extended_menu))
 		cfgList.append(getConfigListEntry(_("Downloaded interval"), cfg.nr))
@@ -1212,7 +1242,9 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Frames info"), cfg.display))
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
+		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma.")))
 		cfgList.append(self.tmpdir_entry)
+		self["config"].list = cfgList
 		ConfigListScreen.__init__(self, cfgList, session, on_change=self.changedEntry)
 
 		self.onChangedEntry = []
@@ -1237,7 +1269,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 	###
 
 	def setWindowTitle(self):
-		self.setTitle(_("CzechMeteo Setup"))
+		self.setTitle(self.setup_title)
 
 	def ok(self):
 		from Screens.LocationBox import LocationBox
