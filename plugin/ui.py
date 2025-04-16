@@ -777,6 +777,8 @@ class czechMeteo(Screen, HelpableScreen):
 					self.merLoad.startDecode(PPATH + RADAR_MM)
 				if cfg.home.value and fileExists(E2PATH + HOME_CSR):
 					self.homeLoad.startDecode(E2PATH + HOME_CSR)
+				else:
+					self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
 				self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
 				if cfg.mer.value: # paralel an meridians
