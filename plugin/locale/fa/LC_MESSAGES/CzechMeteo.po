@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: meteo viewer Persian Translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-12 07:44+0200\n"
+"POT-Creation-Date: 2025-04-16 10:47+0200\n"
 "PO-Revision-Date: 2012-07-28 22:35+0330\n"
 "Last-Translator: mehdi <mehdi_ar_yekta@yahoo.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -13,18 +13,18 @@ msgstr ""
 "X-Poedit-Language: Persian\n"
 "X-Poedit-Country: IRAN, ISLAMIC REPUBLIC OF\n"
 
-#: ../ui.py:1251
+#: ../ui.py:1298
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr ""
 
 #
-#: ../ui.py:845 ../ui.py:849
+#: ../ui.py:878 ../ui.py:882
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr ""
 
-#: ../ui.py:70
+#: ../ui.py:75
 msgid ""
 "24h-MF - Vertically extensive cloudiness is depicted in dark red, thin cirrus clouds in dark blue, medium and low cloudiness in ocher, the lowest cloudiness transitions to green, terrain according to temperature to pink or blue, water surfaces to blue.\n"
 "\n"
@@ -33,35 +33,35 @@ msgid ""
 "  - BLUE, the more intense = warmer object"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "24h-MF Czech Republic"
 msgstr ""
 
 #
-#: ../ui.py:487
+#: ../ui.py:513
 msgid "Abort"
 msgstr "نتیجه ای در بر نداشت"
 
 #
-#: ../ui.py:1194
+#: ../ui.py:1239
 msgid "After download \"All\" switch to"
 msgstr ""
 
-#: ../ui.py:50
+#: ../ui.py:51
 msgid "All"
 msgstr ""
 
 #
-#: ../ui.py:889
+#: ../ui.py:922
 msgid "Are You sure delete this frame?"
 msgstr "آیا واقعا می خواهید این فریم را حذف کنید ؟"
 
-#: ../ui.py:485
+#: ../ui.py:511
 msgid "Back"
 msgstr ""
 
 #
-#: ../ui.py:309 ../ui.py:513 ../ui.py:1173
+#: ../ui.py:327 ../ui.py:539 ../ui.py:1216
 msgid "Cancel"
 msgstr "لغو کردن"
 
@@ -71,75 +71,83 @@ msgstr "لغو کردن"
 msgid "Czech Meteo"
 msgstr "CzechMeteo راه انداری نمایشگر"
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "Czech Radar"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "Czech Storm"
 msgstr ""
 
-#: ../ui.py:266 ../ui.py:386 ../ui.py:458
+#: ../ui.py:280 ../ui.py:412 ../ui.py:484
 msgid "CzechMeteo"
 msgstr ""
 
 #
-#: ../ui.py:1169 ../ui.py:1225
+#: ../ui.py:1213
 #, fuzzy
 msgid "CzechMeteo Setup"
 msgstr "CzechMeteo راه انداری نمایشگر"
 
 #
-#: ../ui.py:1195
+#: ../ui.py:1240
 msgid "Delete old files before download"
 msgstr "حذف فایل های قدیمی قبل از بارگذاری"
 
 #
-#: ../ui.py:1183
+#: ../ui.py:1227
 msgid "Directory for download"
 msgstr "دایرکتوری برای بارگذاری شده ها"
 
 #
-#: ../ui.py:1188
+#: ../ui.py:1233
 msgid "Display"
 msgstr "نمایش"
 
+#: ../ui.py:1245
+msgid "Display home position"
+msgstr ""
+
 #
-#: ../ui.py:311 ../ui.py:515 ../ui.py:794
+#: ../ui.py:329 ../ui.py:541 ../ui.py:827
 msgid "Download"
 msgstr "بارگذاری کردن"
 
 #
-#: ../ui.py:1192
+#: ../ui.py:1237
 msgid "Download info on plugin's start"
 msgstr "بارگذاری اطلاعات بروی پلاگین"
 
 #
-#: ../ui.py:623 ../ui.py:673 ../ui.py:695
+#: ../ui.py:649 ../ui.py:699 ../ui.py:721
 msgid "Download pictures, please!"
 msgstr "بارگذاری تصاویر و لطفا !"
 
 #
-#: ../ui.py:493
+#: ../ui.py:519
 msgid "Download:"
 msgstr "بارگذاری کردن"
 
 #
-#: ../ui.py:1187
+#: ../ui.py:1232
 msgid "Downloaded interval"
 msgstr "بارگذاری بازه زمانی"
 
 #
-#: ../ui.py:920
+#: ../ui.py:953
 msgid "Erase files..."
 msgstr "پاک کردن فایل ها ..."
 
+#: ../ui.py:1245
+msgid "For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma."
+msgstr ""
+
 #
-#: ../ui.py:1197
+#: ../ui.py:1242
 msgid "Frames info"
 msgstr "فریم اطلاعات"
 
-#: ../ui.py:57 ../ui.py:74
+#: ../ui.py:58 ../ui.py:79
 msgid ""
 "IR - Traditional display\n"
 "\n"
@@ -147,19 +155,19 @@ msgid ""
 "  - LIGHT - cold areas"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "IR BT Czech Republic"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "IR Central Europe"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "IR Europe"
 msgstr ""
 
-#: ../ui.py:65
+#: ../ui.py:70
 #, python-format
 msgid ""
 "IR-BT - Traditional display (color scale is embedded in individual images)\n"
@@ -171,47 +179,47 @@ msgid ""
 msgstr ""
 
 #
-#: ../ui.py:878
+#: ../ui.py:911
 msgid "LT"
 msgstr ""
 
 #
-#: ../ui.py:1198
+#: ../ui.py:1243
 msgid "Local time in info"
 msgstr "نمایش زمان محلی در نوار اطلاعات"
 
 #
-#: ../ui.py:1232
+#: ../ui.py:1279
 msgid "Location for CzechMeteo"
 msgstr "Meteo مکانی برای نمایشگر"
 
 #
-#: ../ui.py:584 ../ui.py:715 ../ui.py:735 ../ui.py:803 ../ui.py:841
-#: ../ui.py:891
+#: ../ui.py:610 ../ui.py:741 ../ui.py:761 ../ui.py:836 ../ui.py:874
+#: ../ui.py:924
 msgid "No files found!"
 msgstr "هیچ فایل یافت نشد"
 
 #
-#: ../ui.py:1196
+#: ../ui.py:1241
 msgid "On exit delete files"
 msgstr "خارج شدن از فایل های حذف شده"
 
 #
-#: ../ui.py:312 ../ui.py:516 ../ui.py:795
+#: ../ui.py:330 ../ui.py:542 ../ui.py:828
 msgid "Options"
 msgstr "گزینه ها"
 
 #
-#: ../ui.py:1199
+#: ../ui.py:1244
 msgid "Parallels and meridians"
 msgstr ""
 
 #
-#: ../ui.py:472
+#: ../ui.py:498
 msgid "Prepare..."
 msgstr "آمادی سازی کردن ..."
 
-#: ../ui.py:78
+#: ../ui.py:83
 msgid ""
 "Radar information\n"
 "\n"
@@ -219,65 +227,65 @@ msgid ""
 msgstr ""
 
 #
-#: ../ui.py:1190
+#: ../ui.py:1235
 msgid "Refresh slideshow"
 msgstr "بازآوری نمایش اسلایدها"
 
-#: ../ui.py:1186
+#: ../ui.py:1231
 msgid "Run from 'Extended' menu"
 msgstr ""
 
 #
-#: ../ui.py:1172
+#: ../ui.py:1215
 msgid "Save"
 msgstr "ذخیره سازی کردن "
 
 #
-#: ../ui.py:406
+#: ../ui.py:432
 msgid "Select info type:"
 msgstr "meteo انتخاب نوع انتخاب شده"
 
 #
-#: ../ui.py:514 ../ui.py:572 ../ui.py:793
+#: ../ui.py:540 ../ui.py:598 ../ui.py:826
 msgid "Slideshow"
 msgstr "نمایش اسلایدها"
 
 #
-#: ../ui.py:1191
+#: ../ui.py:1236
 msgid "Slideshow begins from"
 msgstr "شروع نمایش بصورت اسلایدوار از ...."
 
 #
-#: ../ui.py:1189
+#: ../ui.py:1234
 msgid "Slideshow's step"
 msgstr "مراحل نمایش اسلایدها"
 
 #
-#: ../ui.py:783
+#: ../ui.py:816
 #, fuzzy
 msgid "Stop Show"
 msgstr "متوقف سازی نمایش "
 
 #
-#: ../ui.py:500 ../ui.py:713 ../ui.py:733
+#: ../ui.py:526 ../ui.py:739 ../ui.py:759
 msgid "Stop slideshow, please!"
 msgstr "متوقف سازی نمایش اسلایدها و لطفا !"
 
-#: ../ui.py:77
+#: ../ui.py:82
 msgid "Storm detection"
 msgstr ""
 
 #
-#: ../ui.py:1193 ../ui.py:1251
+#: ../ui.py:1238 ../ui.py:1298
 msgid "Type of meteo info on start"
 msgstr "در شروع کار meteo نوع اطلاعات"
 
 #
-#: ../ui.py:880
+#: ../ui.py:913
 msgid "UTC"
 msgstr ""
 
-#: ../ui.py:60
+#: ../ui.py:61
 msgid ""
 "VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n"
 "\n"
@@ -287,32 +295,45 @@ msgid ""
 "  - DARK BLUE = water"
 msgstr ""
 
-#: ../ui.py:49
+#: ../ui.py:50
 msgid "VIS-IR Czech Republic"
 msgstr ""
 
+#: ../ui.py:66
+msgid ""
+"WV - spectral band of water vapor absorption (channel WV 6.2)\n"
+"\n"
+"  - DARK shades correspond to dry and cloud-free upper troposphere\n"
+"  - LIGHTER shade, the more water vapor is present in that layer\n"
+"  This spectral channel also captures the highest cloud tops - cirrus and cumulonimbus clouds (shown in white), but not medium or low cloudiness."
+msgstr ""
+
+#: ../ui.py:50
+msgid "WV6.2 Czech Republic"
+msgstr ""
+
 #
-#: ../ui.py:105
+#: ../ui.py:115
 msgid "actual position"
 msgstr "جایگاه واقعی"
 
 #
-#: ../ui.py:102
+#: ../ui.py:112
 msgid "all frames"
 msgstr "همه فریم ها"
 
 #
-#: ../ui.py:117
+#: ../ui.py:127
 msgid "all types"
 msgstr "همه نوع ها"
 
 #
-#: ../ui.py:105
+#: ../ui.py:115
 msgid "begin"
 msgstr "شروع کردن"
 
 #
-#: ../ui.py:117
+#: ../ui.py:127
 msgid "current type"
 msgstr "نوع فعلی"
 
@@ -321,127 +342,127 @@ msgid "czech meteo information viewer"
 msgstr ""
 
 #
-#: ../ui.py:288
+#: ../ui.py:302
 msgid "delete current frame"
 msgstr "حذف فریم های موجود"
 
 #
-#: ../ui.py:102
+#: ../ui.py:112
 msgid "downloaded interval"
 msgstr "بارگذاری بازه زمانی"
 
 #
-#: ../ui.py:270 ../ui.py:281
+#: ../ui.py:284 ../ui.py:295
 msgid "exit plugin"
 msgstr "خارج شدن از پلاگین"
 
 #
-#: ../ui.py:289
+#: ../ui.py:303
 msgid "go to first downloaded frame"
 msgstr "رفتن به اولین فریم بارگذاری شده"
 
 #
-#: ../ui.py:290
+#: ../ui.py:304
 msgid "go to last downloaded frame"
 msgstr "رفتن به آخرین فریم بارگذاری شده"
 
 #
-#: ../ui.py:271
+#: ../ui.py:285
 msgid "go to last frame"
 msgstr "رفتن به آخرین فریم"
 
 #
-#: ../ui.py:278
+#: ../ui.py:292
 msgid "go to next frame"
 msgstr "رفتن به فریم بعدی"
 
 #
-#: ../ui.py:277
+#: ../ui.py:291
 msgid "go to previous frame"
 msgstr "رفتن به فریم قبلی"
 
 #
-#: ../ui.py:115
+#: ../ui.py:125
 msgid "info"
 msgstr "اطلاعات"
 
 #
-#: ../ui.py:115
+#: ../ui.py:125
 msgid "info and progress bar"
 msgstr "اطلاعات و نوار پیشرفت کار "
 
 #
-#: ../ui.py:276
+#: ../ui.py:290
 msgid "menu"
 msgstr "منو"
 
 #
-#: ../ui.py:104 ../ui.py:117
+#: ../ui.py:114 ../ui.py:127
 msgid "no"
 msgstr "نه"
 
 #
-#: ../ui.py:115
+#: ../ui.py:125
 msgid "none"
 msgstr "هیچ کدام"
 
 #
-#: ../ui.py:118
+#: ../ui.py:128
 msgid "older than downloaded interval"
 msgstr "قدیمی تر از بازه زمانی بارگذاری"
 
 #
-#: ../ui.py:118
+#: ../ui.py:128
 msgid "older than max. interval"
 msgstr "قدیمی تر از بازه زمانی نهایی"
 
 #
-#: ../ui.py:285
+#: ../ui.py:299
 msgid "options"
 msgstr "گزینه ها"
 
 #
-#: ../ui.py:283
+#: ../ui.py:297
 #, fuzzy
 msgid "play slideshow"
 msgstr "نمایش / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:282
+#: ../ui.py:296
 msgid "play/stop slideshow"
 msgstr "نمایش / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:115
+#: ../ui.py:125
 msgid "progress bar"
 msgstr "نوار پیشرفت کار"
 
 #
-#: ../ui.py:523
+#: ../ui.py:549
 msgid "refresh..."
 msgstr "بازآوری کردن ..."
 
 #
-#: ../ui.py:284
+#: ../ui.py:298
 msgid "run/abort download"
 msgstr "اجرا یا لغو بارگذاری های بی نتیجه"
 
 #
-#: ../ui.py:286
+#: ../ui.py:300
 msgid "stop slideshow/synaptic map"
 msgstr " synaptic map / متوقف ساختن نمایش اسلایدها"
 
 #
-#: ../ui.py:279
+#: ../ui.py:293
 msgid "switch to next meteo type"
 msgstr "meteo  سوئیچ کردن به نوع بعدی"
 
 #
-#: ../ui.py:280
+#: ../ui.py:294
 msgid "switch to previous meteo type"
 msgstr "meteo  سوئیچ کردن به نوع قبلی"
 
 #
-#: ../ui.py:287
+#: ../ui.py:301
 msgid "synaptic maps"
 msgstr ""

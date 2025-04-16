@@ -47,7 +47,7 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("WV Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
+INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("WV6.2 Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
@@ -65,7 +65,7 @@ _("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n
   - DARK BLUE = water"),
 _("WV - spectral band of water vapor absorption (channel WV 6.2)\n\n\
   - DARK shades correspond to dry and cloud-free upper troposphere\n\
-  - LIGHTER the shade, the more water vapor is present in that layer\n\
+  - LIGHTER shade, the more water vapor is present in that layer\n\
   This spectral channel also captures the highest cloud tops - cirrus and cumulonimbus clouds (shown in white), but not medium or low cloudiness."),
 _("IR-BT - Traditional display (color scale is embedded in individual images)\n\n\
   - DARK = warm areas\n\
@@ -771,7 +771,7 @@ class czechMeteo(Screen, HelpableScreen):
 		else:
 			if TYPE[self.typ] == "csr":
 				self.picload.startDecode(PPATH + BACKGROUND[self.typ])
-				if cfg.mer.value and fileExists(E2PATH + RADAR_MM):
+				if cfg.mer.value and fileExists(E2PATH + RADAR_MM): # for own mm picture
 					self.merLoad.startDecode(E2PATH + RADAR_MM)
 				else:
 					self.merLoad.startDecode(PPATH + RADAR_MM)
