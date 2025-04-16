@@ -1202,9 +1202,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 			<convert type="ClockToText">Default</convert>
 		</widget>
 
-		<widget name="statusbar" position="10,359" size="460,20" font="Regular;18" backgroundColor="%s" />
-
-	</screen>""" % (bgcolor, bgcolor, bgcolor)
+	</screen>""" % (bgcolor, bgcolor)
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -1255,7 +1253,6 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
-		self["statusbar"].setText(self.version)
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent()[0]
@@ -1287,7 +1284,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 			cfg.tmpdir.value = res
 		else:
 			cfg.tmpdir.value = self.old_dir
-		self["statusbar"].setText(self.version)
+		self["description"].setText("")
 
 	def save(self):
 		global TMPDIR
@@ -1296,7 +1293,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		TMPDIR = cfg.tmpdir.value
 		if INFO[int(cfg.type.value)] == 'All' and cfg.tmpdir.value.startswith('/tmp/'):
 			text = _("!!! '%s' as 'All' cannot be used with '/tmp/' !!!") % _("Type of meteo info on start")
-			self["statusbar"].setText(text)
+			self["description"].setText(text)
 			return
 		self.refreshPlugins()
 		self.keySave()
