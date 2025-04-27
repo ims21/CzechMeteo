@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-16 10:47+0200\n"
+"POT-Creation-Date: 2025-04-27 05:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui.py:1298
+#: ../ui.py:1329
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr ""
 
-#: ../ui.py:878 ../ui.py:882
+#: ../ui.py:899 ../ui.py:903
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr ""
 
-#: ../ui.py:75
+#: ../ui.py:79
 msgid ""
 "24h-MF - Vertically extensive cloudiness is depicted in dark red, thin cirrus clouds in dark blue, medium and low cloudiness in ocher, the lowest cloudiness transitions to green, terrain according to temperature to pink or blue, water surfaces to blue.\n"
 "\n"
@@ -40,11 +40,11 @@ msgstr ""
 msgid "24h-MF Czech Republic"
 msgstr ""
 
-#: ../ui.py:513
+#: ../ui.py:529
 msgid "Abort"
 msgstr ""
 
-#: ../ui.py:1239
+#: ../ui.py:1270
 msgid "After download \"All\" switch to"
 msgstr ""
 
@@ -52,15 +52,15 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ../ui.py:922
+#: ../ui.py:943
 msgid "Are You sure delete this frame?"
 msgstr ""
 
-#: ../ui.py:511
+#: ../ui.py:527
 msgid "Back"
 msgstr ""
 
-#: ../ui.py:327 ../ui.py:539 ../ui.py:1216
+#: ../ui.py:343 ../ui.py:555 ../ui.py:1247
 msgid "Cancel"
 msgstr ""
 
@@ -76,63 +76,67 @@ msgstr ""
 msgid "Czech Storm"
 msgstr ""
 
-#: ../ui.py:280 ../ui.py:412 ../ui.py:484
+#: ../ui.py:296 ../ui.py:428 ../ui.py:500
 msgid "CzechMeteo"
 msgstr ""
 
-#: ../ui.py:1213
+#: ../ui.py:1244
 msgid "CzechMeteo Setup"
 msgstr ""
 
-#: ../ui.py:1240
+#: ../ui.py:1271
 msgid "Delete old files before download"
 msgstr ""
 
-#: ../ui.py:1227
+#: ../ui.py:1258
 msgid "Directory for download"
 msgstr ""
 
-#: ../ui.py:1233
+#: ../ui.py:1264
 msgid "Display"
 msgstr ""
 
-#: ../ui.py:1245
+#: ../ui.py:1276
+msgid "Display CZ Regions"
+msgstr ""
+
+#: ../ui.py:1277
 msgid "Display home position"
 msgstr ""
 
-#: ../ui.py:329 ../ui.py:541 ../ui.py:827
+#: ../ui.py:345 ../ui.py:557 ../ui.py:848
 msgid "Download"
 msgstr ""
 
-#: ../ui.py:1237
+#: ../ui.py:1268
 msgid "Download info on plugin's start"
 msgstr ""
 
-#: ../ui.py:649 ../ui.py:699 ../ui.py:721
+#: ../ui.py:665 ../ui.py:715 ../ui.py:737
 msgid "Download pictures, please!"
 msgstr ""
 
-#: ../ui.py:519
+#: ../ui.py:535
 msgid "Download:"
 msgstr ""
 
-#: ../ui.py:1232
+#: ../ui.py:1263
 msgid "Downloaded interval"
 msgstr ""
 
-#: ../ui.py:953
+#: ../ui.py:974
 msgid "Erase files..."
 msgstr ""
 
-#: ../ui.py:1245
+#: ../ui.py:1277
 msgid "For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma."
 msgstr ""
 
-#: ../ui.py:1242
+#: ../ui.py:1273
 msgid "Frames info"
 msgstr ""
 
-#: ../ui.py:58 ../ui.py:79
+#: ../ui.py:63 ../ui.py:71 ../ui.py:92
 msgid ""
 "IR - Traditional display\n"
 "\n"
@@ -149,10 +153,14 @@ msgid "IR Central Europe"
 msgstr ""
 
 #: ../ui.py:50
+msgid "IR Czech Republic"
+msgstr ""
+
+#: ../ui.py:50
 msgid "IR Europe"
 msgstr ""
 
-#: ../ui.py:70
+#: ../ui.py:74
 #, python-format
 msgid ""
 "IR-BT - Traditional display (color scale is embedded in individual images)\n"
@@ -163,95 +171,95 @@ msgid ""
 "  - RED = -73%sC (200 K)"
 msgstr ""
 
-#: ../ui.py:911
+#: ../ui.py:932
 msgid "LT"
 msgstr ""
 
-#: ../ui.py:1243
+#: ../ui.py:1274
 msgid "Local time in info"
 msgstr ""
 
-#: ../ui.py:1279
+#: ../ui.py:1310
 msgid "Location for CzechMeteo"
 msgstr ""
 
-#: ../ui.py:610 ../ui.py:741 ../ui.py:761 ../ui.py:836 ../ui.py:874
-#: ../ui.py:924
+#: ../ui.py:626 ../ui.py:757 ../ui.py:777 ../ui.py:857 ../ui.py:895
+#: ../ui.py:945
 msgid "No files found!"
 msgstr ""
 
-#: ../ui.py:1241
+#: ../ui.py:1272
 msgid "On exit delete files"
 msgstr ""
 
-#: ../ui.py:330 ../ui.py:542 ../ui.py:828
+#: ../ui.py:346 ../ui.py:558 ../ui.py:849
 msgid "Options"
 msgstr ""
 
-#: ../ui.py:1244
+#: ../ui.py:1275
 msgid "Parallels and meridians"
 msgstr ""
 
-#: ../ui.py:498
+#: ../ui.py:514
 msgid "Prepare..."
 msgstr ""
 
-#: ../ui.py:83
+#: ../ui.py:96
 msgid ""
 "Radar information\n"
 "\n"
 "  - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"
 msgstr ""
 
-#: ../ui.py:1235
+#: ../ui.py:1266
 msgid "Refresh slideshow"
 msgstr ""
 
-#: ../ui.py:1231
+#: ../ui.py:1262
 msgid "Run from 'Extended' menu"
 msgstr ""
 
-#: ../ui.py:1215
+#: ../ui.py:1246
 msgid "Save"
 msgstr ""
 
-#: ../ui.py:432
+#: ../ui.py:448
 msgid "Select info type:"
 msgstr ""
 
-#: ../ui.py:540 ../ui.py:598 ../ui.py:826
+#: ../ui.py:556 ../ui.py:614 ../ui.py:847
 msgid "Slideshow"
 msgstr ""
 
-#: ../ui.py:1236
+#: ../ui.py:1267
 msgid "Slideshow begins from"
 msgstr ""
 
-#: ../ui.py:1234
+#: ../ui.py:1265
 msgid "Slideshow's step"
 msgstr ""
 
-#: ../ui.py:816
+#: ../ui.py:837
 msgid "Stop Show"
 msgstr ""
 
-#: ../ui.py:526 ../ui.py:739 ../ui.py:759
+#: ../ui.py:542 ../ui.py:755 ../ui.py:775
 msgid "Stop slideshow, please!"
 msgstr ""
 
-#: ../ui.py:82
+#: ../ui.py:95
 msgid "Storm detection"
 msgstr ""
 
-#: ../ui.py:1238 ../ui.py:1298
+#: ../ui.py:1269 ../ui.py:1329
 msgid "Type of meteo info on start"
 msgstr ""
 
-#: ../ui.py:913
+#: ../ui.py:934
 msgid "UTC"
 msgstr ""
 
-#: ../ui.py:61
+#: ../ui.py:58 ../ui.py:66 ../ui.py:87
 msgid ""
 "VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n"
 "\n"
@@ -262,10 +270,18 @@ msgid ""
 msgstr ""
 
 #: ../ui.py:50
+msgid "VIS-IR Central Europe"
+msgstr ""
+
+#: ../ui.py:50
 msgid "VIS-IR Czech Republic"
 msgstr ""
 
-#: ../ui.py:66
+#: ../ui.py:50
+msgid "VIS-IR Europe"
+msgstr ""
+
+#: ../ui.py:83
 msgid ""
 "WV - spectral band of water vapor absorption (channel WV 6.2)\n"
 "\n"
@@ -278,23 +294,23 @@ msgstr ""
 msgid "WV6.2 Czech Republic"
 msgstr ""
 
-#: ../ui.py:115
+#: ../ui.py:130
 msgid "actual position"
 msgstr ""
 
-#: ../ui.py:112
+#: ../ui.py:127
 msgid "all frames"
 msgstr ""
 
-#: ../ui.py:127
+#: ../ui.py:142
 msgid "all types"
 msgstr ""
 
-#: ../ui.py:115
+#: ../ui.py:130
 msgid "begin"
 msgstr ""
 
-#: ../ui.py:127
+#: ../ui.py:142
 msgid "current type"
 msgstr ""
 
@@ -302,102 +318,102 @@ msgstr ""
 msgid "czech meteo information viewer"
 msgstr ""
 
-#: ../ui.py:302
+#: ../ui.py:318
 msgid "delete current frame"
 msgstr ""
 
-#: ../ui.py:112
+#: ../ui.py:127
 msgid "downloaded interval"
 msgstr ""
 
-#: ../ui.py:284 ../ui.py:295
+#: ../ui.py:300 ../ui.py:311
 msgid "exit plugin"
 msgstr ""
 
-#: ../ui.py:303
+#: ../ui.py:319
 msgid "go to first downloaded frame"
 msgstr ""
 
-#: ../ui.py:304
+#: ../ui.py:320
 msgid "go to last downloaded frame"
 msgstr ""
 
-#: ../ui.py:285
+#: ../ui.py:301
 msgid "go to last frame"
 msgstr ""
 
-#: ../ui.py:292
+#: ../ui.py:308
 msgid "go to next frame"
 msgstr ""
 
-#: ../ui.py:291
+#: ../ui.py:307
 msgid "go to previous frame"
 msgstr ""
 
-#: ../ui.py:125
+#: ../ui.py:140
 msgid "info"
 msgstr ""
 
-#: ../ui.py:125
+#: ../ui.py:140
 msgid "info and progress bar"
 msgstr ""
 
-#: ../ui.py:290
+#: ../ui.py:306
 msgid "menu"
 msgstr ""
 
-#: ../ui.py:114 ../ui.py:127
+#: ../ui.py:129 ../ui.py:142
 msgid "no"
 msgstr ""
 
-#: ../ui.py:125
+#: ../ui.py:140
 msgid "none"
 msgstr ""
 
-#: ../ui.py:128
+#: ../ui.py:143
 msgid "older than downloaded interval"
 msgstr ""
 
-#: ../ui.py:128
+#: ../ui.py:143
 msgid "older than max. interval"
 msgstr ""
 
-#: ../ui.py:299
+#: ../ui.py:315
 msgid "options"
 msgstr ""
 
-#: ../ui.py:297
+#: ../ui.py:313
 msgid "play slideshow"
 msgstr ""
 
-#: ../ui.py:296
+#: ../ui.py:312
 msgid "play/stop slideshow"
 msgstr ""
 
-#: ../ui.py:125
+#: ../ui.py:140
 msgid "progress bar"
 msgstr ""
 
-#: ../ui.py:549
+#: ../ui.py:565
 msgid "refresh..."
 msgstr ""
 
-#: ../ui.py:298
+#: ../ui.py:314
 msgid "run/abort download"
 msgstr ""
 
-#: ../ui.py:300
+#: ../ui.py:316
 msgid "stop slideshow/synaptic map"
 msgstr ""
 
-#: ../ui.py:293
+#: ../ui.py:309
 msgid "switch to next meteo type"
 msgstr ""
 
-#: ../ui.py:294
+#: ../ui.py:310
 msgid "switch to previous meteo type"
 msgstr ""
 
-#: ../ui.py:301
+#: ../ui.py:317
 msgid "synaptic maps"
 msgstr ""

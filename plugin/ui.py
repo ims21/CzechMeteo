@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2025
-VERSION = "v2.07 (ims 2011-2025)"
+VERSION = "v2.09 (ims 2011-2025)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -47,14 +47,19 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("IR Central Europe"), _("VIS-IR Czech Republic"), _("WV6.2 Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
+INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
-TYPE = ["ir", "vis", "wv", "bt", "24m", "eu", "storm", "csr"]
+TYPE = ["visce", "irce", "vis", "ircz", "bt", "24m", "wv", "viseu", "ireu", "storm", "csr"]
 TYPE += ["all"]
 
 DESCR = [
+_("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n\
+  - YELLOWISH = low to medium cloudiness (generally warmer)\n\
+  - WHITE to BLUE = high cloudiness (cold)\n\
+  - GREEN = vegetation-covered terrain\n\
+  - DARK BLUE = water"),
 _("IR - Traditional display\n\n\
   - DARK - warm areas\n\
   - LIGHT - cold areas"),
@@ -63,10 +68,9 @@ _("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n
   - WHITE to BLUE = high cloudiness (cold)\n\
   - GREEN = vegetation-covered terrain\n\
   - DARK BLUE = water"),
-_("WV - spectral band of water vapor absorption (channel WV 6.2)\n\n\
-  - DARK shades correspond to dry and cloud-free upper troposphere\n\
-  - LIGHTER shade, the more water vapor is present in that layer\n\
-  This spectral channel also captures the highest cloud tops - cirrus and cumulonimbus clouds (shown in white), but not medium or low cloudiness."),
+_("IR - Traditional display\n\n\
+  - DARK - warm areas\n\
+  - LIGHT - cold areas"),
 _("IR-BT - Traditional display (color scale is embedded in individual images)\n\n\
   - DARK = warm areas\n\
   - LIGHT = cold areas\n\
@@ -76,6 +80,15 @@ _("24h-MF - Vertically extensive cloudiness is depicted in dark red, thin cirrus
   - RED, the more intense = vertically extensive cloudiness\n\
   - GREEN = low cloudiness formed by small droplets\n\
   - BLUE, the more intense = warmer object"),
+_("WV - spectral band of water vapor absorption (channel WV 6.2)\n\n\
+  - DARK shades correspond to dry and cloud-free upper troposphere\n\
+  - LIGHTER shade, the more water vapor is present in that layer\n\
+  This spectral channel also captures the highest cloud tops - cirrus and cumulonimbus clouds (shown in white), but not medium or low cloudiness."),
+_("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n\
+  - YELLOWISH = low to medium cloudiness (generally warmer)\n\
+  - WHITE to BLUE = high cloudiness (cold)\n\
+  - GREEN = vegetation-covered terrain\n\
+  - DARK BLUE = water"),
 _("IR - Traditional display\n\n\
   - DARK - warm areas\n\
   - LIGHT - cold areas"),
@@ -93,20 +106,22 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
-BACKGROUND = ["bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "e.png", "radar.png"]
+BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "e.png", "radar.png"]
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
-MER = ["merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "estorm.png"]
+MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "estorm.png"]
 for i in range(0, len(TYPE) + 1):
 	MER.append("e.png")
 EMPTYFRAME = "e.jpg"
 
 RADAR_MM = "radar_mm.png"
 
-HOME = ["homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "estorm.png"]
+HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "e.png", "estorm.png"]
 for i in range(0, len(TYPE) + 1):
 	HOME.append("e.png")
 HOME_CSR = "homecsr.png"
+
+REGIONS = "bgczregions.png"
 
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
 config.plugins.czechmeteo.frames = ConfigSelection(default="0", choices=[("0", _("downloaded interval")), ("1", _("all frames"))])
@@ -118,10 +133,10 @@ config.plugins.czechmeteo.download = ConfigYesNo(default=False)
 choicelist = []
 for i in range(0, len(INFO)):
 	choicelist.append(("%d" % i, "%s" % INFO[i]))
-config.plugins.czechmeteo.type = ConfigSelection(default="5", choices=choicelist)
+config.plugins.czechmeteo.type = ConfigSelection(default="8", choices=choicelist)
 
 # CHOICES FOR AFTER "ALL" (WITHOUT "ALL"):
-config.plugins.czechmeteo.typeafterall = ConfigSelection(default="6", choices=config.plugins.czechmeteo.type.choices[:-1])
+config.plugins.czechmeteo.typeafterall = ConfigSelection(default="9", choices=config.plugins.czechmeteo.type.choices[:-1])
 config.plugins.czechmeteo.display = ConfigSelection(default="3", choices=[("0", _("none")), ("1", _("info")), ("2", _("progress bar")), ("3", _("info and progress bar"))])
 config.plugins.czechmeteo.localtime = ConfigYesNo(default=False)
 config.plugins.czechmeteo.delete = ConfigSelection(default="4", choices=[("0", _("no")), ("1", _("current type")), ("2", _("all types")),
@@ -129,6 +144,7 @@ config.plugins.czechmeteo.delete = ConfigSelection(default="4", choices=[("0", _
 config.plugins.czechmeteo.delend = ConfigYesNo(default=True)
 config.plugins.czechmeteo.tmpdir = ConfigDirectory(TMPDIR)
 config.plugins.czechmeteo.mer = ConfigYesNo(default=False)
+config.plugins.czechmeteo.regions = ConfigYesNo(default=False)
 config.plugins.czechmeteo.home = ConfigYesNo(default=False)
 
 choicelist = []
@@ -780,14 +796,17 @@ class czechMeteo(Screen, HelpableScreen):
 				else:
 					self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
-				self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
+				if cfg.regions.value and TYPE[self.typ] in ("vis", "ircz", "bt", "24m", "wv"):
+					self.borderLoad.startDecode(PPATH + REGIONS)
+				else:
+					self.borderLoad.startDecode(PPATH + BACKGROUND[self.typ])
 				if cfg.mer.value: # paralel an meridians
 					self.merLoad.startDecode(PPATH + MER[self.typ])
 				else:
 					self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 
 				if cfg.home.value: # home position
-					if TYPE[self.typ] in ("eu", "ir", "vis", "wv", "bt", "24m", "storm") and fileExists(E2PATH + HOME[self.typ]):
+					if TYPE[self.typ] in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "storm") and fileExists(E2PATH + HOME[self.typ]):
 						self.homeLoad.startDecode(E2PATH + HOME[self.typ])
 					else:
 						self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
@@ -970,7 +989,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if not self.refreshLast:  # dont read if refresh
 				self.downloadOnce(typ)
 
-		if typ in ("eu", "ir", "vis", "wv", "bt", "24m", "csr", "all"):
+		if typ in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "all"):
 			if not self.stopRead:
 				self.downloadMain(typ)
 		if typ in ("storm", "all"):
@@ -1081,7 +1100,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if cfg.delete.value == "3":
 				startDel = now15 - int(cfg.nr.choices[len(cfg.nr.choices) - 1]) * 900
 			if typ == "all":
-				for i in ("eu", "ir", "vis", "bt", "24m", "csr"):
+				for i in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr"):
 					self.deleteOldFiles(i, gmtime(startDel))
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
@@ -1095,20 +1114,39 @@ class czechMeteo(Screen, HelpableScreen):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
 
-			if typ == "eu" or typ == "all":
+			if typ == "ireu" or typ == "all":
 				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, eu, eu, frDate, frTime)
-				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("eu")), frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ireu")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
-			if typ == "ir" or typ == "all":
+			if typ == "viseu" or typ == "all":
+				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, eu, eu, frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("viseu")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
+			if typ == "irce" or typ == "all":
 				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, ce, ce, frDate, frTime)
-				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ir")), frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("irce")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
-
+			if typ == "visce" or typ == "all":
+				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, ce, ce, frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("visce")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
 			if typ == "vis" or typ == "all":
 				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("vis")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
+			if typ == "ircz" or typ == "all":
+				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ircz")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
+			if typ == "bt" or typ == "all":
+				url = "%s/img-%s-ir108BT/%s.ir108BT.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("bt")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "wv" or typ == "all":
@@ -1116,13 +1154,6 @@ class czechMeteo(Screen, HelpableScreen):
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("wv")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
-
-			if typ == "bt" or typ == "all":
-				url = "%s/img-%s-ir108BT/%s.ir108BT.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
-				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("bt")), frDate, frTime)
-				if not self.downloadFrame(url, path):
-					break
-
 			if typ == "24m" or typ == "all":
 				url = "%s/img-%s-24M/%s.24M.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("24m")), frDate, frTime)
@@ -1242,6 +1273,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Frames info"), cfg.display))
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
+		cfgList.append(getConfigListEntry(_("Display CZ Regions"), cfg.regions))
 		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma.")))
 		cfgList.append(self.tmpdir_entry)
 		self["config"].list = cfgList
