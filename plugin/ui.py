@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2026
-VERSION = "v2.1.0 (ims 2011-2026)"
+VERSION = "v2.1.1 (ims 2011-2026)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -47,11 +47,11 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Czech Storm"), _("Czech Radar")]
+INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Czech Storm"), _("Czech 5mins Radar"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
-TYPE = ["visce", "irce", "vis", "ircz", "bt", "24m", "wv", "viseu", "ireu", "storm", "csr"]
+TYPE = ["visce", "irce", "vis", "ircz", "bt", "24m", "wv", "viseu", "ireu", "storm", "csr5", "csr"]
 TYPE += ["all"]
 
 DESCR = [
@@ -94,6 +94,8 @@ _("IR - Traditional display\n\n\
   - LIGHT - cold areas"),
 _("Storm detection"),
 _("Radar information\n\n\
+  - current composite radar image from the Czech radar (worse resolution, but 5 minuts interval)"),
+_("Radar information\n\n\
   - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"),
 ""
 	]
@@ -106,7 +108,7 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
-BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "e.png", "radar.png"]
+BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "e.png", "radar5.png", "radar.png"]
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
 MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "estorm.png"]
@@ -120,6 +122,8 @@ HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "h
 for i in range(0, len(TYPE) + 1):
 	HOME.append("e.png")
 HOME_CSR = "homecsr.png"
+HOME_CSR5 = "homecsr5.png"
+RADAR5CITY = "radar5c.png"
 
 REGIONS = "bgczregions.png"
 
@@ -146,6 +150,7 @@ config.plugins.czechmeteo.tmpdir = ConfigDirectory(TMPDIR)
 config.plugins.czechmeteo.mer = ConfigYesNo(default=False)
 config.plugins.czechmeteo.regions = ConfigYesNo(default=False)
 config.plugins.czechmeteo.home = ConfigYesNo(default=False)
+config.plugins.czechmeteo.city = ConfigYesNo(default=False)
 
 choicelist = []
 for i in range(16, 65):
@@ -631,11 +636,15 @@ class czechMeteo(Screen, HelpableScreen):
 
 	def setIndex(self):
 		self.idx = self.startIdx = 0
-		if TYPE[self.typ] == "storm":
+		if TYPE[self.typ] == "storm": # 10 minuts
 			if self.maxFrames > int(cfg.nr.value) // 4 * 6:
 				if cfg.frames.value == "0":
 					self.startIdx = self.maxFrames - int(cfg.nr.value) // 4 * 6 - 1
-		else:
+		elif TYPE[self.typ] == "csr5": # 5 minuts
+			if self.maxFrames > int(cfg.nr.value) // 4 * 12:
+				if cfg.frames.value == "0":
+					self.startIdx = self.maxFrames - int(cfg.nr.value) // 4 * 12 - 1
+		else: # 15 minuts
 			if self.maxFrames > int(cfg.nr.value):
 				if cfg.frames.value == "0":
 					self.startIdx = self.maxFrames - int(cfg.nr.value)
@@ -683,13 +692,13 @@ class czechMeteo(Screen, HelpableScreen):
 				self["slide"].show()
 
 	def setExtension(self):
-		if TYPE[self.typ] in ("storm", "csr"):
+		if TYPE[self.typ] in ("storm", "csr", "csr5"):
 			self.EXT = ".png"
 		else:
 			self.EXT = ".jpg"
 
 	def displayFrame(self, path):
-		if TYPE[self.typ] == "csr":
+		if TYPE[self.typ] in ("csr", "csr5"):
 			self.borderLoad.startDecode(path)
 		else:
 			self.picload.startDecode(path)
@@ -778,21 +787,25 @@ class czechMeteo(Screen, HelpableScreen):
 
 	def redrawBorder(self):
 		if self.isSynaptic:
-			if TYPE[self.typ] != "csr":
+			if TYPE[self.typ] not in("csr", "csr5"):
 				self.borderLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
 				self.picload.startDecode(PPATH + BACKGROUND[len(BACKGROUND) - 1])
 			self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			self.firstSynaptic = False
 		else:
-			if TYPE[self.typ] == "csr":
-				self.picload.startDecode(PPATH + BACKGROUND[self.typ])
+			if TYPE[self.typ] in ("csr", "csr5"):
+				if TYPE[self.typ] == "csr5":
+					CSR_BACKGROUND = BACKGROUND[self.typ] if not cfg.city.value else RADAR5CITY
+					self.picload.startDecode(PPATH + CSR_BACKGROUND)
 				if cfg.mer.value and fileExists(E2PATH + RADAR_MM): # for own mm picture
 					self.merLoad.startDecode(E2PATH + RADAR_MM)
 				else:
 					self.merLoad.startDecode(PPATH + RADAR_MM)
-				if cfg.home.value and fileExists(E2PATH + HOME_CSR):
+				if cfg.home.value and TYPE[self.typ] == "csr" and fileExists(E2PATH + HOME_CSR):
 					self.homeLoad.startDecode(E2PATH + HOME_CSR)
+				elif cfg.home.value and TYPE[self.typ] == "csr5" and fileExists(E2PATH + HOME_CSR5):
+					self.homeLoad.startDecode(E2PATH + HOME_CSR5)
 				else:
 					self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
@@ -989,7 +1002,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if not self.refreshLast:  # dont read if refresh
 				self.downloadOnce(typ)
 
-		if typ in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "all"):
+		if typ in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "csr5", "all"):
 			if not self.stopRead:
 				self.downloadMain(typ)
 		if typ in ("storm", "all"):
@@ -1089,6 +1102,8 @@ class czechMeteo(Screen, HelpableScreen):
 		#print("[CzechMeteo] >>>Main>>>", typ,  TYPE.index(typ))
 		interval = int(cfg.nr.value) * 900
 		step = 900			# 15 minut
+		if typ == "csr5":		# 5 minuts radar
+			step = 300
 		now = int(time())		# LT
 		now15 = (now // step) * step 	# last x min
 
@@ -1100,7 +1115,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if cfg.delete.value == "3":
 				startDel = now15 - int(cfg.nr.choices[len(cfg.nr.choices) - 1]) * 900
 			if typ == "all":
-				for i in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr"):
+				for i in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "csr5"):
 					self.deleteOldFiles(i, gmtime(startDel))
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
@@ -1163,8 +1178,12 @@ class czechMeteo(Screen, HelpableScreen):
 
 			if typ == "csr" or typ == "all":
 				url = "https://intranet.chmi.cz/files/portal/docs/meteo/rad/data_tr_png_1km/pacz23.z_max3d.%s.%s.0.png" % (frDate, frTime)
-				#url = "http://www.chmi.cz/files/portal/docs/meteo/rad/data/%s%s.gif" % (frDate[2:], frTime)
 				path = "%s%s%s.png" % (self.getDir(TYPE.index("csr")), frDate, frTime)
+				if not self.downloadFrame(url, path):
+					break
+			if typ == "csr5" or typ == "all":
+				url = "https://intranet.chmi.cz/files/portal/docs/meteo/rad/inca-cz/data/czrad-z_max3d/pacz2gmaps3.z_max3d.%s.%s.0.png" % (frDate, frTime)
+				path = "%s%s%s.png" % (self.getDir(TYPE.index("csr5")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
@@ -1275,7 +1294,8 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
 		cfgList.append(getConfigListEntry(_("Display CZ Regions"), cfg.regions))
-		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma.")))
+		cfgList.append(getConfigListEntry(_("Display cities in 5mins radar background"), cfg.city))
+		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610), homecsr5.png (680x640) and estorm.png (438*338) with mark there in /etc/enigma.")))
 		cfgList.append(self.tmpdir_entry)
 		self["config"].list = cfgList
 		ConfigListScreen.__init__(self, cfgList, session, on_change=self.changedEntry)

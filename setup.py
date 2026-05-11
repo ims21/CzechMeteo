@@ -3,7 +3,7 @@ import setup_translate
 
 pkg = 'Extensions.CzechMeteo'
 setup (name = 'enigma2-plugin-extensions-czechmeteo',
-	version = '2.1.0',
+	version = '2.1.1',
 	description = 'czech meteo information viewer',
 	packages = [pkg],
 	package_dir = {pkg: 'plugin'},

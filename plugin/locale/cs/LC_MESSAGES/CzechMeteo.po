@@ -7,24 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MeteoViewer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-27 05:41+0200\n"
-"PO-Revision-Date: 2025-04-27 05:41+0200\n"
-"Last-Translator: ims <ims21@users.sourceforge.net>\n"
+"POT-Creation-Date: 2026-05-11 18:36+0200\n"
+"PO-Revision-Date: 2026-05-11 18:41+0200\n"
+"Last-Translator: ims <ims@openpli.org>\n"
 "Language-Team: ims\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
-#: ../ui.py:1329
+#: ../ui.py:1350
 #, python-format
 msgid "!!! '%s' as 'All' cannot be used with '/tmp/' !!!"
 msgstr "!!! '%s' jako 'All' nelze použít s  '/tmp/' !!!"
 
 #
-#: ../ui.py:899 ../ui.py:903
+#: ../ui.py:912 ../ui.py:916
 #, python-format
 msgid "%s of %s  -  %s"
 msgstr "%s z %s  -  %s"
@@ -48,12 +48,12 @@ msgid "24h-MF Czech Republic"
 msgstr "24h-MF Česká republika"
 
 #
-#: ../ui.py:529
+#: ../ui.py:534
 msgid "Abort"
 msgstr "Přerušit"
 
 #
-#: ../ui.py:1270
+#: ../ui.py:1290
 msgid "After download \"All\" switch to"
 msgstr "Po stažení \"All\" přepnout do"
 
@@ -62,18 +62,22 @@ msgid "All"
 msgstr "Vše"
 
 #
-#: ../ui.py:943
+#: ../ui.py:956
 msgid "Are You sure delete this frame?"
 msgstr "Chcete opravdu smazat tento snímek?"
 
-#: ../ui.py:527
+#: ../ui.py:532
 msgid "Back"
 msgstr "Zpět"
 
 #
-#: ../ui.py:343 ../ui.py:555 ../ui.py:1247
+#: ../ui.py:348 ../ui.py:560 ../ui.py:1267
 msgid "Cancel"
 msgstr "Zavřít"
+
+#: ../ui.py:50
+msgid "Czech 5mins Radar"
+msgstr "Radar (5minut)"
 
 #
 #: ../plugin.py:29
@@ -88,74 +92,78 @@ msgstr "Radar"
 msgid "Czech Storm"
 msgstr "Detekce blesků"
 
-#: ../ui.py:296 ../ui.py:428 ../ui.py:500
+#: ../ui.py:301 ../ui.py:433 ../ui.py:505
 msgid "CzechMeteo"
 msgstr ""
 
 #
-#: ../ui.py:1244
+#: ../ui.py:1264
 msgid "CzechMeteo Setup"
 msgstr "Nastavení CzechMeteo"
 
 #
-#: ../ui.py:1271
+#: ../ui.py:1291
 msgid "Delete old files before download"
 msgstr "Před stahováním odstranit soubory"
 
 #
-#: ../ui.py:1258
+#: ../ui.py:1278
 msgid "Directory for download"
 msgstr "Adresář pro ukládání"
 
 #
-#: ../ui.py:1264
+#: ../ui.py:1284
 msgid "Display"
 msgstr "Zobrazovat"
 
-#: ../ui.py:1276
+#: ../ui.py:1296
 msgid "Display CZ Regions"
 msgstr "Zobrazovat hranice krajů pro ČR"
 
-#: ../ui.py:1277
+#: ../ui.py:1297
+msgid "Display cities in 5mins radar background"
+msgstr "Zobrazovat pro 5 minutový radar města v pozadí"
+
+#: ../ui.py:1298
 msgid "Display home position"
 msgstr "Zobrazovat místní polohu"
 
 #
-#: ../ui.py:345 ../ui.py:557 ../ui.py:848
+#: ../ui.py:350 ../ui.py:562 ../ui.py:861
 msgid "Download"
 msgstr "Stáhnout"
 
 #
-#: ../ui.py:1268
+#: ../ui.py:1288
 msgid "Download info on plugin's start"
 msgstr "Stahovat informace po spuštění pluginu"
 
 #
-#: ../ui.py:665 ../ui.py:715 ../ui.py:737
+#: ../ui.py:674 ../ui.py:724 ../ui.py:746
 msgid "Download pictures, please!"
 msgstr "Stahněte soubory, prosím!"
 
 #
-#: ../ui.py:535
+#: ../ui.py:540
 msgid "Download:"
 msgstr "Stahování:"
 
 #
-#: ../ui.py:1263
+#: ../ui.py:1283
 msgid "Downloaded interval"
 msgstr "Stahovaný interval"
 
 #
-#: ../ui.py:974
+#: ../ui.py:987
 msgid "Erase files..."
 msgstr "Mazání souborů..."
 
-#: ../ui.py:1277
-msgid "For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610) and estorm.png (438*338) with mark there in /etc/enigma."
-msgstr "Soubory se značkou pozice - homece.png, homecz.png (oba v rozlišení 1160*800), homecsr.png (810*610) a estorm.png (438*338) musí být v /etc/enigma."
+#: ../ui.py:1298
+msgid "For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610), homecsr5.png (680x640) and estorm.png (438*338) with mark there in /etc/enigma."
+msgstr "Soubory se značkou pozice - homece.png, homecz.png (oba v rozlišení 1160*800), homecsr.png (810*610), homecsr5.png (680x460) a estorm.png (438*338) musí být v /etc/enigma."
 
 #
-#: ../ui.py:1273
+#: ../ui.py:1293
 msgid "Frames info"
 msgstr "Zobrazovat informace o snímku"
 
@@ -205,47 +213,57 @@ msgstr ""
 "  - ČERVENÁ = -73%sC (200 K)"
 
 #
-#: ../ui.py:932
+#: ../ui.py:945
 msgid "LT"
 msgstr "(místní čas)"
 
 #
-#: ../ui.py:1274
+#: ../ui.py:1294
 msgid "Local time in info"
 msgstr "Místní čas v info"
 
 #
-#: ../ui.py:1310
+#: ../ui.py:1331
 msgid "Location for CzechMeteo"
 msgstr "Umístění pro CzechMeteo"
 
 #
-#: ../ui.py:626 ../ui.py:757 ../ui.py:777 ../ui.py:857 ../ui.py:895
-#: ../ui.py:945
+#: ../ui.py:631 ../ui.py:766 ../ui.py:786 ../ui.py:870 ../ui.py:908
+#: ../ui.py:958
 msgid "No files found!"
 msgstr "Nebyly nalezeny žádné soubory!"
 
 #
-#: ../ui.py:1272
+#: ../ui.py:1292
 msgid "On exit delete files"
 msgstr "Smazat soubory po ukončení"
 
 #
-#: ../ui.py:346 ../ui.py:558 ../ui.py:849
+#: ../ui.py:351 ../ui.py:563 ../ui.py:862
 msgid "Options"
 msgstr "Možnosti"
 
 #
-#: ../ui.py:1275
+#: ../ui.py:1295
 msgid "Parallels and meridians"
 msgstr "Zobrazovat rovnoběžky a poledníky"
 
 #
-#: ../ui.py:514
+#: ../ui.py:519
 msgid "Prepare..."
 msgstr "Příprava..."
 
 #: ../ui.py:96
+msgid ""
+"Radar information\n"
+"\n"
+"  - current composite radar image from the Czech radar (worse resolution, but 5 minuts interval)"
+msgstr ""
+"Radarové informace\n"
+"\n"
+"  - aktuální snímek sloučené radarové informace z České radarové sítě (horší rozlišení, ale 5 minutový interval snímků)"
+
+#: ../ui.py:98
 msgid ""
 "Radar information\n"
 "\n"
@@ -256,46 +274,46 @@ msgstr ""
 "  - aktuální snímek sloučené radarové informace z České radarové sítě CZRAD (z radarů Brdy-Praha a Skalky)"
 
 #
-#: ../ui.py:1266
+#: ../ui.py:1286
 msgid "Refresh slideshow"
 msgstr "Aktualizace prezentace"
 
-#: ../ui.py:1262
+#: ../ui.py:1282
 msgid "Run from 'Extended' menu"
 msgstr "Spouštět z Extended menu"
 
 #
-#: ../ui.py:1246
+#: ../ui.py:1266
 msgid "Save"
 msgstr "Uložit"
 
 #
-#: ../ui.py:448
+#: ../ui.py:453
 msgid "Select info type:"
 msgstr "Zvolte požadované meteorologické informace:"
 
 #
-#: ../ui.py:556 ../ui.py:614 ../ui.py:847
+#: ../ui.py:561 ../ui.py:619 ../ui.py:860
 msgid "Slideshow"
 msgstr "Prezentace"
 
 #
-#: ../ui.py:1267
+#: ../ui.py:1287
 msgid "Slideshow begins from"
 msgstr "Prezentace začíná od"
 
 #
-#: ../ui.py:1265
+#: ../ui.py:1285
 msgid "Slideshow's step"
 msgstr "Krok prezentace"
 
 #
-#: ../ui.py:837
+#: ../ui.py:850
 msgid "Stop Show"
 msgstr "Zastavit"
 
 #
-#: ../ui.py:542 ../ui.py:755 ../ui.py:775
+#: ../ui.py:547 ../ui.py:764 ../ui.py:784
 msgid "Stop slideshow, please!"
 msgstr "Zastavte prezentaci, prosím!"
 
@@ -304,12 +322,12 @@ msgid "Storm detection"
 msgstr "Detekce blesků"
 
 #
-#: ../ui.py:1269 ../ui.py:1329
+#: ../ui.py:1289 ../ui.py:1350
 msgid "Type of meteo info on start"
 msgstr "Typ meteo informací po startu"
 
 #
-#: ../ui.py:934
+#: ../ui.py:947
 msgid "UTC"
 msgstr "UTC"
 
@@ -360,27 +378,27 @@ msgid "WV6.2 Czech Republic"
 msgstr "WV6.2 Česká republika"
 
 #
-#: ../ui.py:130
+#: ../ui.py:134
 msgid "actual position"
 msgstr "aktuální pozice"
 
 #
-#: ../ui.py:127
+#: ../ui.py:131
 msgid "all frames"
 msgstr "všechny snímky"
 
 #
-#: ../ui.py:142
+#: ../ui.py:146
 msgid "all types"
 msgstr "všechny typy"
 
 #
-#: ../ui.py:130
+#: ../ui.py:134
 msgid "begin"
 msgstr "začátku"
 
 #
-#: ../ui.py:142
+#: ../ui.py:146
 msgid "current type"
 msgstr "aktuální typ"
 
@@ -389,126 +407,126 @@ msgid "czech meteo information viewer"
 msgstr "prohlížeč meteo informací pro Českou republiku"
 
 #
-#: ../ui.py:318
+#: ../ui.py:323
 msgid "delete current frame"
 msgstr "odstranit aktuální snímek"
 
 #
-#: ../ui.py:127
+#: ../ui.py:131
 msgid "downloaded interval"
 msgstr "stahovaný interval"
 
 #
-#: ../ui.py:300 ../ui.py:311
+#: ../ui.py:305 ../ui.py:316
 msgid "exit plugin"
 msgstr "ukončit plugin"
 
 #
-#: ../ui.py:319
+#: ../ui.py:324
 msgid "go to first downloaded frame"
 msgstr "na první stažený snímek"
 
 #
-#: ../ui.py:320
+#: ../ui.py:325
 msgid "go to last downloaded frame"
 msgstr "na poslední stažený snímek"
 
 #
-#: ../ui.py:301
+#: ../ui.py:306
 msgid "go to last frame"
 msgstr "přejít na poslední snímek"
 
 #
-#: ../ui.py:308
+#: ../ui.py:313
 msgid "go to next frame"
 msgstr "následující snímek"
 
 #
-#: ../ui.py:307
+#: ../ui.py:312
 msgid "go to previous frame"
 msgstr "předchozí snímek"
 
 #
-#: ../ui.py:140
+#: ../ui.py:144
 msgid "info"
 msgstr "informace"
 
 #
-#: ../ui.py:140
+#: ../ui.py:144
 msgid "info and progress bar"
 msgstr "info a průběh prezentace"
 
 #
-#: ../ui.py:306
+#: ../ui.py:311
 msgid "menu"
 msgstr "výběr meteo informací"
 
 #
-#: ../ui.py:129 ../ui.py:142
+#: ../ui.py:133 ../ui.py:146
 msgid "no"
 msgstr "ne"
 
 #
-#: ../ui.py:140
+#: ../ui.py:144
 msgid "none"
 msgstr "žádné"
 
 #
-#: ../ui.py:143
+#: ../ui.py:147
 msgid "older than downloaded interval"
 msgstr "starší než stahovaný interval"
 
 #
-#: ../ui.py:143
+#: ../ui.py:147
 msgid "older than max. interval"
 msgstr "starší než max. interval"
 
 #
-#: ../ui.py:315
+#: ../ui.py:320
 msgid "options"
 msgstr "nastavení"
 
 #
-#: ../ui.py:313
+#: ../ui.py:318
 msgid "play slideshow"
 msgstr "spustit prezentaci"
 
 #
-#: ../ui.py:312
+#: ../ui.py:317
 msgid "play/stop slideshow"
 msgstr "přehrát/zastavit prezentaci"
 
 #
-#: ../ui.py:140
+#: ../ui.py:144
 msgid "progress bar"
 msgstr "průběh prezentace"
 
 #
-#: ../ui.py:565
+#: ../ui.py:570
 msgid "refresh..."
 msgstr "refresh..."
 
 #
-#: ../ui.py:314
+#: ../ui.py:319
 msgid "run/abort download"
 msgstr "spustit/přerušit stahování"
 
 #
-#: ../ui.py:316
+#: ../ui.py:321
 msgid "stop slideshow/synaptic map"
 msgstr "zastavit prezentaci/synaptická mapa"
 
 #
-#: ../ui.py:309
+#: ../ui.py:314
 msgid "switch to next meteo type"
 msgstr "přepnout na další meteo typ"
 
 #
-#: ../ui.py:310
+#: ../ui.py:315
 msgid "switch to previous meteo type"
 msgstr "přepnout na předchozí meteo typ"
 
 #
-#: ../ui.py:317
+#: ../ui.py:322
 msgid "synaptic maps"
 msgstr "synaptické mapy"
