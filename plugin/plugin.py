@@ -2,7 +2,7 @@ from __future__ import absolute_import
 #
 #  Czech Meteo Viewer - Plugin E2
 #
-#  by ims (c) 2011-2024
+#  by ims (c) 2011-2026
 #
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License

@@ -4,8 +4,8 @@ from . import _
 #
 #  Czech Meteo Viewer - Plugin E2
 #
-#  by ims (c) 2011-2025
-VERSION = "v2.09 (ims 2011-2025)"
+#  by ims (c) 2011-2026
+VERSION = "v2.1.0 (ims 2011-2026)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -1016,28 +1016,28 @@ class czechMeteo(Screen, HelpableScreen):
 		#print("[CzechMeteo] >>>Once>>>", typ,  TYPE.index(typ))
 		system("rm %s/*.* >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/evropa/T2m_stredomori.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/evropa/T2m_stredomori.gif"
 		path = "%s03T2m_stredomori.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/evropa/RH_stredomori.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/evropa/RH_stredomori.gif"
 		path = "%s04RH_stredomori.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/svet/T2m_svet.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/svet/T2m_svet.gif"
 		path = "%s05T2m_svet.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/svet/T2m_amerika.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/svet/T2m_amerika.gif"
 		path = "%s06T2m_amerika.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/svet/T2m_jvazaust.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/svet/T2m_jvazaust.gif"
 		path = "%s07T2m_jvazaust.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/svet/T2m_afrika.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/svet/T2m_afrika.gif"
 		path = "%s08T2m_afrika.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/evropa/T2m_evropa.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/evropa/T2m_evropa.gif"
 		path = "%s02T2m_evropa.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
-		url = "http://portal.chmi.cz/files/portal/docs/meteo/om/evropa/analyza.gif"
+		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/evropa/analyza.gif"
 		path = "%s01synoptic.gif" % (TMPDIR + SUBDIR + "/")
 		self.downloadFrame(url, path)
 
@@ -1108,7 +1108,8 @@ class czechMeteo(Screen, HelpableScreen):
 		eu = "msgeu-1160x800"
 		ce = "msgce-1160x800"
 		cz = "msgcz-1160x800"
-		page = "http://www.chmi.cz/files/portal/docs/meteo/sat/msg_hrit"
+
+		page = "https://intranet.chmi.cz/files/portal/docs/meteo/sat/msg_hrit"
 
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
@@ -1161,7 +1162,7 @@ class czechMeteo(Screen, HelpableScreen):
 					break
 
 			if typ == "csr" or typ == "all":
-				url = "http://portal.chmi.cz/files/portal/docs/meteo/rad/data_tr_png_1km/pacz23.z_max3d.%s.%s.0.png" % (frDate, frTime)
+				url = "https://intranet.chmi.cz/files/portal/docs/meteo/rad/data_tr_png_1km/pacz23.z_max3d.%s.%s.0.png" % (frDate, frTime)
 				#url = "http://www.chmi.cz/files/portal/docs/meteo/rad/data/%s%s.gif" % (frDate[2:], frTime)
 				path = "%s%s%s.png" % (self.getDir(TYPE.index("csr")), frDate, frTime)
 				if not self.downloadFrame(url, path):
@@ -1189,7 +1190,7 @@ class czechMeteo(Screen, HelpableScreen):
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
-			url = "http://www.chmi.cz/files/portal/docs/meteo/blesk/data/pacz21.blesk.%s.%s.10_9.png" % (frDate, frTime)
+			url = "https://intranet.chmi.cz/files/portal/docs/meteo/blesk/data/pacz21.blesk.%s.%s.10_9.png" % (frDate, frTime)
 			path = "%s%s%s.png" % (self.getDir(TYPE.index("storm")), frDate, frTime)
 			if not self.downloadFrame(url, path):
 				break
