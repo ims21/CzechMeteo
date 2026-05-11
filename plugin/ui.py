@@ -647,8 +647,9 @@ class czechMeteo(Screen, HelpableScreen):
 		else: # 15 minuts
 			if self.maxFrames > int(cfg.nr.value):
 				if cfg.frames.value == "0":
-					self.startIdx = self.maxFrames - int(cfg.nr.value)
+					self.startIdx = self.maxFrames - int(cfg.nr.value) - 1
 		self.idx = self.startIdx
+		#print("[CzechMeteo] >>> type: %s, maxFrames=%d, cfg.nr=%d, cfg.frames=%s startIdx=%d" % (TYPE[self.typ], self.maxFrames, int(cfg.nr.value),cfg.frames.value, self.startIdx))
 
 	def afterCfg(self, data=True):
 		if self.isSynaptic:
@@ -795,9 +796,10 @@ class czechMeteo(Screen, HelpableScreen):
 			self.firstSynaptic = False
 		else:
 			if TYPE[self.typ] in ("csr", "csr5"):
-				if TYPE[self.typ] == "csr5":
-					CSR_BACKGROUND = BACKGROUND[self.typ] if not cfg.city.value else RADAR5CITY
-					self.picload.startDecode(PPATH + CSR_BACKGROUND)
+				CSR_BACKGROUND = BACKGROUND[self.typ]
+				if TYPE[self.typ] == "csr5" and cfg.city.value:
+					CSR_BACKGROUND = RADAR5CITY
+				self.picload.startDecode(PPATH + CSR_BACKGROUND)
 				if cfg.mer.value and fileExists(E2PATH + RADAR_MM): # for own mm picture
 					self.merLoad.startDecode(E2PATH + RADAR_MM)
 				else:
