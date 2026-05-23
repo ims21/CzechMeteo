@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from . import _
 #
 #  Czech Meteo Viewer - Plugin E2
 #
@@ -25,7 +26,7 @@ def main(session, **kwargs):
 	from . import ui
 	session.open(ui.czechMeteo)
 
-def Plugins(path,**kwargs):
+def Plugins(path, **kwargs):
 	name = _("Czech Meteo")
 	descr = _("czech meteo information viewer")
 	pluginList = [PluginDescriptor(name=name, description=descr, where=[PluginDescriptor.WHERE_PLUGINMENU], icon="czmeteo.png", fnc=main)]

@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2026
-VERSION = "v2.1.2 (ims 2011-2026)"
+VERSION = "v2.1.3 (ims 2011-2026)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -20,8 +20,6 @@ VERSION = "v2.1.2 (ims 2011-2026)"
 # remove FileList by jbleyel
 
 import os
-from os import listdir, system
-from os.path import isdir, join
 from re import search
 from enigma import ePicLoad, getDesktop
 from Screens.Screen import Screen
@@ -41,7 +39,6 @@ import enigma
 from Tools.Directories import fileExists
 from Screens.ChoiceBox import ChoiceBox
 from Components.ProgressBar import ProgressBar
-import requests
 
 TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
@@ -109,22 +106,19 @@ if getDesktop(0).size().width() >= 1280:
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
 BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "e.png", "radar5.png", "radar.png"]
+MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "estorm.png"]
+HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "e.png", "estorm.png"]
+# fallback items for future TYPE extensions
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
-MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "estorm.png"]
-for i in range(0, len(TYPE) + 1):
 	MER.append("e.png")
-EMPTYFRAME = "e.jpg"
-
-RADAR_MM = "radar_mm.png"
-
-HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "e.png", "estorm.png"]
-for i in range(0, len(TYPE) + 1):
 	HOME.append("e.png")
+
+EMPTYFRAME = "e.jpg"
+RADAR_MM = "radar_mm.png"
 HOME_CSR = "homecsr.png"
 HOME_CSR5 = "homecsr5.png"
 RADAR5CITY = "radar5c.png"
-
 REGIONS = "bgczregions.png"
 
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
@@ -300,6 +294,24 @@ class czechMeteo(Screen, HelpableScreen):
 		self.skinName = ["czechMeteo", "meteoViewer"]
 		self.setup_title = _("CzechMeteo")
 
+		# Used timers
+		self.stopSlideShowDelay = eTimer()
+		self.stopSlideShowDelay.timeout.get().append(self.stopSlideShowFinished)
+		self.waitLastFrame = eTimer()
+		self.waitLastFrame.timeout.get().append(self.lastFrame)
+		self.waitDownloadFrames = eTimer()
+		self.waitDownloadFrames.timeout.get().append(self.downloadFrames)
+		self.waitHTTPS = eTimer()
+		self.waitHTTPS.timeout.get().append(self.httpsRun)
+		self.waitFiles = eTimer()
+		self.waitFiles.timeout.get().append(self.waitingFiles)
+		self.slideShowTimer = eTimer()
+		self.slideShowTimer.timeout.get().append(self.slideShowEvent)
+		self.refreshTimer = eTimer()
+		self.refreshTimer.timeout.get().append(self.setRefreshFlag)
+		self.waitRefresh = eTimer()
+		self.waitRefresh.timeout.get().append(self.waitingRefresh)
+
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
 			"cancel": (self.end, _("exit plugin")),
@@ -326,21 +338,10 @@ class czechMeteo(Screen, HelpableScreen):
 			#"1": (self.refreshFrames, _("refresh last frame")),
 			}, -2)
 
-		self["frames"] = Pixmap()
-		self.picload = enigma.ePicLoad()
-		self.picload.PictureData.get().append(self.showPic)
-
-		self["border"] = Pixmap()
-		self.borderLoad = enigma.ePicLoad()
-		self.borderLoad.PictureData.get().append(self.showBorderPic)
-
-		self["mer"] = Pixmap()
-		self.merLoad = enigma.ePicLoad()
-		self.merLoad.PictureData.get().append(self.showMerPic)
-
-		self["home"] = Pixmap()
-		self.homeLoad = enigma.ePicLoad()
-		self.homeLoad.PictureData.get().append(self.showHomePic)
+		self.picload = self.initPixmap("frames", self.showPic)
+		self.borderLoad = self.initPixmap("border", self.showBorderPic)
+		self.merLoad = self.initPixmap("mer", self.showMerPic)
+		self.homeLoad = self.initPixmap("home", self.showHomePic)
 
 		self["msg"] = Label()
 		self["description"] = Label()
@@ -379,8 +380,6 @@ class czechMeteo(Screen, HelpableScreen):
 		self.mainMenu = False
 
 		self.queue = []
-		self.waitHTTPS = eTimer()
-		self.waitHTTPS.timeout.get().append(self.httpsRun)
 
 		self.Limited = LimitedDownloader(5)  # limit for parallel downloading
 		if cfg.download.value:
@@ -391,40 +390,47 @@ class czechMeteo(Screen, HelpableScreen):
 			self.onLayoutFinish.append(self.readFiles)
 		self.onShown.append(self.setParams)
 
+	def initPixmap(self, widget, callback):
+		self[widget] = Pixmap()
+
+		loader = enigma.ePicLoad()
+		loader.PictureData.get().append(callback)
+
+		return loader
+
+	def setPicloadPara(self, widget, loader):
+		par = [
+			self[widget].instance.size().width(),
+			self[widget].instance.size().height(),
+			1, 1, False, 0, "#00000000"
+		]
+		loader.setPara(par)
+
 	def setParams(self):
 		self.displayMeteoType()
-		par = [self["frames"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
-		self.picload.setPara(par)
-		par = [self["border"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
-		self.borderLoad.setPara(par)
-		par = [self["mer"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
-		self.merLoad.setPara(par)
-		par = [self["home"].instance.size().width(), self["frames"].instance.size().height(), 1, 1, False, 0, "#00000000"]
-		self.homeLoad.setPara(par)
+
+		self.setPicloadPara("frames", self.picload)
+		self.setPicloadPara("border", self.borderLoad)
+		self.setPicloadPara("mer", self.merLoad)
+		self.setPicloadPara("home", self.homeLoad)
+
+	def showPixmap(self, loader, widget):
+		ptr = loader.getData()
+		if ptr is not None:
+			self[widget].instance.setPixmap(ptr.__deref__())
+			self[widget].show()
 
 	def showPic(self, picInfo=None):
-		ptr = self.picload.getData()
-		if ptr != None:
-			self["frames"].instance.setPixmap(ptr.__deref__())
-			self["frames"].show()
+		self.showPixmap(self.picload, "frames")
 
 	def showBorderPic(self, picInfo=None):
-		ptr = self.borderLoad.getData()
-		if ptr != None:
-			self["border"].instance.setPixmap(ptr.__deref__())
-			self["border"].show()
+		self.showPixmap(self.borderLoad, "border")
 
 	def showMerPic(self, picInfo=None):
-		ptr = self.merLoad.getData()
-		if ptr != None:
-			self["mer"].instance.setPixmap(ptr.__deref__())
-			self["mer"].show()
+		self.showPixmap(self.merLoad, "mer")
 
 	def showHomePic(self, picInfo=None):
-		ptr = self.homeLoad.getData()
-		if ptr != None:
-			self["home"].instance.setPixmap(ptr.__deref__())
-			self["home"].show()
+		self.showPixmap(self.homeLoad, "home")
 
 	def getDir(self, num_typ):
 		return TMPDIR + SUBDIR + "/" + TYPE[num_typ] + "/"
@@ -448,7 +454,7 @@ class czechMeteo(Screen, HelpableScreen):
 		menu = []
 		self.mainMenu = True
 		for i in range(0, len(TYPE)-1):
-			print(INFO[i], TYPE[i])
+#			print(INFO[i], TYPE[i])
 			menu.append((INFO[i], TYPE[i]))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title=_("Select info type:"), list=menu)
 
@@ -465,43 +471,27 @@ class czechMeteo(Screen, HelpableScreen):
 				self.download_delayed()
 
 	def increase_typ(self):
-		slide = False
-		if self.isShow:
-			self.stopSlideShow()
-			slide = True
-		if not self.isShow:
-			if self.typ >= (len(TYPE) - 1 - 1):
-				self.typ = 0
-			else:
-				self.typ += 1
-		#self.setExtension()
-		self.displayMeteoType()
-		#self.redrawBorder()
-		self.readFiles(delay=0.1, border=True)
-
-		if slide:
-			self.slideShow()
+		self.change_type(1)
 
 	def decrease_typ(self):
-		slide = False
-		if self.isShow:
-			self.stopSlideShow()
-			slide = True
-		if not self.isShow:
-			if self.typ <= 0:
-				self.typ = len(TYPE) - 1 - 1
-			else:
-				self.typ -= 1
-		#self.setExtension()
-		self.displayMeteoType()
-		#self.redrawBorder()
-		self.readFiles(delay=0.1, border=True)
+		self.change_type(-1)
 
+	def change_type(self, step):
+		slide = self.isShow
+		if slide:
+			self.stopSlideShow(delay=False)
+		self.typ += step
+		if self.typ < 0:
+			self.typ = len(TYPE) - 2
+		elif self.typ > len(TYPE) - 2:
+			self.typ = 0
+		self.displayMeteoType()
+		self.readFiles(delay=0.1, border=True)
 		if slide:
 			self.slideShow()
 
 	def displayMeteoType(self):
-		print("000000000000", self.typ)
+#		print("000000000000", self.typ)
 		self.setTitle(_("CzechMeteo") + " - " + INFO[self.typ])
 		self.displayDescription()
 
@@ -517,9 +507,7 @@ class czechMeteo(Screen, HelpableScreen):
 			self.stopRead = True
 		else:
 			self.displayMsg(_("Prepare..."))
-			self.waitGS = eTimer()
-			self.waitGS.timeout.get().append(self.downloadFrames)
-			self.waitGS.start(250, True)
+			self.waitDownloadFrames.start(250, True)
 
 	def downloadFrames(self):
 		self.emptyFrame()
@@ -540,9 +528,8 @@ class czechMeteo(Screen, HelpableScreen):
 			self.displayMsg(_("Download:"))
 			self["download"].setValue(0)
 			self["download"].show()
-			self.Wait = eTimer()
-			self.Wait.timeout.get().append(self.waitingFiles)
-			self.Wait.start(500, True)
+
+			self.waitFiles.start(500, True)
 		else:
 			self.displayMsg(_("Stop slideshow, please!"))
 
@@ -550,7 +537,7 @@ class czechMeteo(Screen, HelpableScreen):
 		if self.dlFrame:
 			print("[CzechMeteo] NR: %d" % self.dlFrame)
 			self["download"].setValue(int(100.0 * (self.x - self.dlFrame) / self.x + 0.25))
-			self.Wait.start(100, True)
+			self.waitFiles.start(100, True)
 		else:
 			self["download"].setValue(self.x)
 			self["download"].hide()
@@ -570,14 +557,11 @@ class czechMeteo(Screen, HelpableScreen):
 		self.displayMsg(_("refresh..."))
 
 		self.downloadFiles(TYPE[self.typ])
-
-		self.wait = eTimer()
-		self.wait.timeout.get().append(self.waitingRefresh)
-		self.wait.start(100, True)
+		self.waitRefresh.start(100, True)
 
 	def waitingRefresh(self):
 		if self.dlFrame:
-			self.wait.start(100, True)
+			self.waitRefresh.start(100, True)
 		else:
 			self.isReading = False
 			self.refreshLast = False
@@ -592,13 +576,13 @@ class czechMeteo(Screen, HelpableScreen):
 	def getFilesFromDir(self, directory, matchingPattern):
 		result = []
 		try:
-			files = listdir(directory)
-		except:
+			files = os.listdir(directory)
+		except Exception:
 			files = []
 		files.sort()
-		files = [x for x in files if not isdir(x)]
+		files = [x for x in files if not os.path.isdir(os.path.join(directory, x))]
 		for x in files:
-			path = join(directory, x)
+			path = os.path.join(directory, x)
 			if (matchingPattern is None) or search(matchingPattern, path):
 				result.append(x)
 		return result
@@ -615,12 +599,12 @@ class czechMeteo(Screen, HelpableScreen):
 		if self.maxFrames != 0:
 			self.filesOK = True
 			self.setIndex()
+			if border:
+				self.redrawBorder()
 			if green:
 				self["key_green"].setText(_("Slideshow"))
 			if last_frame:
-				self.waitLF = eTimer()
-				self.waitLF.timeout.get().append(self.lastFrame)
-				self.waitLF.start(int(delay) * 100, True)
+				self.waitLastFrame.start(int(delay * 1000), True)
 		else:
 			self.setIndex()
 			if empty_frame:
@@ -831,19 +815,16 @@ class czechMeteo(Screen, HelpableScreen):
 	def slideShow(self):
 		self.isSynaptic = False
 		self.redrawBorder()
-		self.slideShowTimer = eTimer()
-		self.slideShowTimer.timeout.get().append(self.slideShowEvent)
+
 		if int(cfg.refresh.value) > 0:
 			self.refreshFlag = False
-			self.refreshTimer = eTimer()
-			self.refreshTimer.timeout.get().append(self.setRefreshFlag)
 			self.refreshTimer.start(int(cfg.refresh.value) * 60000, True)
 		if self.filesOK:
 			self.isShow = True
 
-			if cfg.slidetype == "0": 		# from begin
+			if cfg.slidetype.value == "0": 		# from begin
 				self.idx = self.startIdx
-			elif cfg.slidetype == "1":		# from actual position
+			elif cfg.slidetype.value == "1":	# from actual position
 				if self.idx > self.startIdx:
 					self.idx += 1
 					if self.idx >= self.maxFrames:
@@ -854,7 +835,7 @@ class czechMeteo(Screen, HelpableScreen):
 			self["key_blue"].setText("")
 			self.slideShowTimer.start(500, True)
 
-	def stopSlideShow(self):
+	def stopSlideShow(self, delay=True):
 		if self.isShow:
 			self.slideShowTimer.stop()
 			if int(cfg.refresh.value) > 0:
@@ -870,9 +851,13 @@ class czechMeteo(Screen, HelpableScreen):
 			else:
 				self.emptyFrame()
 				self.displayMsg(_("No files found!"))
-			import time
-			time.sleep(1.0)
-			self.isShow = False
+			if delay:
+				self.stopSlideShowDelay.start(1000, True)
+			else:
+				self.stopSlideShowFinished()
+
+	def stopSlideShowFinished(self):
+		self.isShow = False
 
 	def displaySynaptic(self):
 		if self.isShow:
@@ -988,16 +973,16 @@ class czechMeteo(Screen, HelpableScreen):
 		if cfg.delete.value == "1" or cfg.delete.value == "2":
 			self.displayMsg(_("Erase files..."))
 			if typ == "all" or cfg.delete.value == "2":
-				system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
+				os.system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 			else:
-				system("rm %s*.* >/dev/null 2>&1" % (self.getDir(TYPE.index(typ))))
+				os.system("rm %s*.* >/dev/null 2>&1" % (self.getDir(TYPE.index(typ))))
 
-		system("mkdir %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
+		os.system("mkdir %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 		if typ == "all":
 			for i in range(0, len(TYPE) - 1):
-				system("mkdir %s >/dev/null 2>&1" % (self.getDir(i)))
+				os.system("mkdir %s >/dev/null 2>&1" % (self.getDir(i)))
 		else:
-			system("mkdir %s >/dev/null 2>&1" % (self.getDir(TYPE.index(typ))))
+			os.system("mkdir %s >/dev/null 2>&1" % (self.getDir(TYPE.index(typ))))
 
 		self.beginTime = time()
 		if not self.stopRead:
@@ -1029,7 +1014,7 @@ class czechMeteo(Screen, HelpableScreen):
 
 	def downloadOnce(self, typ):  # only, when is choose "Download"
 		#print("[CzechMeteo] >>>Once>>>", typ,  TYPE.index(typ))
-		system("rm %s/*.* >/dev/null 2>&1" % (TMPDIR + SUBDIR))
+		os.system("rm %s/*.* >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 
 		url = "https://intranet.chmi.cz/files/portal/docs/meteo/om/evropa/T2m_stredomori.gif"
 		path = "%s03T2m_stredomori.gif" % (TMPDIR + SUBDIR + "/")
@@ -1085,20 +1070,18 @@ class czechMeteo(Screen, HelpableScreen):
 			return
 
 	def downloadHttpsPicture(self, url, path):
-		res = requests.get(url)
-		if res.status_code == 200:
-			with open(path, 'wb') as f:
-				f.write(res.content)
-				self.dlFrame -= 1
-				if len(self.queue):
-					self.waitHTTPS.start(20, True)
-		else:
-			print("[CzechMeteo] download failed for:", url, path)
-			self.dlFrame -= 1
-			self.errFrame += 1
-			self.x -= 1
-			if len(self.queue):
-				self.waitHTTPS.start(20, True)
+		self.Limited.downloadPage(url.encode('utf-8'), path).addCallback(self.afterHTTPSDownload).addErrback(self.downloadHTTPSFail)
+	def afterHTTPSDownload(self, result=None):
+		self.dlFrame -= 1
+		if len(self.queue):
+			self.waitHTTPS.start(20, True)
+	def downloadHTTPSFail(self, failure):
+		print("[CzechMeteo]", failure)
+		self.dlFrame -= 1
+		self.errFrame += 1
+		self.x -= 1
+		if len(self.queue):
+			self.waitHTTPS.start(20, True)
 
 	def downloadMain(self, typ):
 		#print("[CzechMeteo] >>>Main>>>", typ,  TYPE.index(typ))
@@ -1218,7 +1201,7 @@ class czechMeteo(Screen, HelpableScreen):
 
 
 	def eraseAllDirectory(self):
-		system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
+		os.system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 
 	def end(self):
 		if self.mainMenu:
@@ -1347,7 +1330,7 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 	def save(self):
 		global TMPDIR
 		if TMPDIR != cfg.tmpdir.value:
-			system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
+			os.system("rm -r %s >/dev/null 2>&1" % (TMPDIR + SUBDIR))
 		TMPDIR = cfg.tmpdir.value
 		if INFO[int(cfg.type.value)] == 'All' and cfg.tmpdir.value.startswith('/tmp/'):
 			text = _("!!! '%s' as 'All' cannot be used with '/tmp/' !!!") % _("Type of meteo info on start")
