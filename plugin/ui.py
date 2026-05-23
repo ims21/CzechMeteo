@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2026
-VERSION = "v2.1.1 (ims 2011-2026)"
+VERSION = "v2.1.2 (ims 2011-2026)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -1327,7 +1327,6 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 
 	def ok(self):
 		from Screens.LocationBox import LocationBox
-		from Components.UsageConfig import preferredPath
 		currentry = self["config"].getCurrent()
 		if currentry == self.tmpdir_entry:
 			txt = _("Location for CzechMeteo")
@@ -1335,6 +1334,8 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 			self.session.openWithCallback(self.dirSelected, LocationBox, text=txt, currDir=cfg.tmpdir.value,
 							bookmarks=config.movielist.videodirs, autoAdd=False, editDir=True,
 							inhibitDirs=inhibitDirs, minFree=400)  # in MB
+		else:
+			ConfigListScreen.keyOK(self)
 
 	def dirSelected(self, res):
 		if res is not None:
