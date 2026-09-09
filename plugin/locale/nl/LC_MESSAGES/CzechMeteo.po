@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MeteoViewer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 11:20+0200\n"
+"POT-Creation-Date: 2026-09-09 11:55+0200\n"
 "PO-Revision-Date: 2011-06-30 13:17+0100\n"
 "Last-Translator: ims\n"
 "Language-Team: ims\n"
@@ -82,7 +82,7 @@ msgid "Czech Radar"
 msgstr ""
 
 #: ../ui.py:47
-msgid "Czech Radar precipitation"
+msgid "Czech Radar precipitation in 2km"
 msgstr ""
 
 #: ../ui.py:295 ../ui.py:439 ../ui.py:495

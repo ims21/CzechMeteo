@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 11:20+0200\n"
+"POT-Creation-Date: 2026-09-09 11:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgid "Czech Radar"
 msgstr ""
 
 #: ../ui.py:47
-msgid "Czech Radar precipitation"
+msgid "Czech Radar precipitation in 2km"
 msgstr ""
 
 #: ../ui.py:295 ../ui.py:439 ../ui.py:495

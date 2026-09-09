@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Enigma 2 MeteoViewer Plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-09 11:20+0200\n"
-"PO-Revision-Date: 2026-09-09 11:20+0200\n"
+"POT-Creation-Date: 2026-09-09 11:55+0200\n"
+"PO-Revision-Date: 2026-09-09 11:56+0200\n"
 "Last-Translator: ims <ims@openpli.org>\n"
 "Language-Team: ims\n"
 "Language: cs_CZ\n"
@@ -85,8 +85,8 @@ msgid "Czech Radar"
 msgstr "Radar"
 
 #: ../ui.py:47
-msgid "Czech Radar precipitation"
-msgstr "Srážky"
+msgid "Czech Radar precipitation in 2km"
+msgstr "Srážky - radar ve 2km"
 
 #: ../ui.py:295 ../ui.py:439 ../ui.py:495
 msgid "CzechMeteo"

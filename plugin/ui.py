@@ -44,7 +44,7 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Lightning detection"), _("Czech Radar"), _("Czech Radar precipitation")]
+INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Lightning detection"), _("Czech Radar"), _("Czech Radar precipitation in 2km")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
