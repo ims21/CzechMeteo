@@ -5,7 +5,7 @@ from . import _
 #  Czech Meteo Viewer - Plugin E2
 #
 #  by ims (c) 2011-2026
-VERSION = "v2.1.3 (ims 2011-2026)"
+VERSION = "v2.2.0 (ims 2011-2026)"
 #  This program is free software; you can redistribute it and/or
 #  modify it under the terms of the GNU General Public License
 #  as published by the Free Software Foundation; either version 2
@@ -44,11 +44,11 @@ TMPDIR = "/tmp/"
 SUBDIR = "czmeteo"
 
 # LIST OF USED NAMES IN MENU, OPTIONS AS INFO ("All" must be at last)
-INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Czech Storm"), _("Czech 5mins Radar"), _("Czech Radar")]
+INFO = [_("VIS-IR Central Europe"), _("IR Central Europe"), _("VIS-IR Czech Republic"), _("IR Czech Republic"), _("IR BT Czech Republic"), _("24h-MF Czech Republic"), _("WV6.2 Czech Republic"), _("VIS-IR Europe"), _("IR Europe"), _("Lightning detection"), _("Czech Radar")]
 INFO += [_("All")]
 
 # LIST OF USED INDEX NAMES AS TYPES: ("all" must be at last")
-TYPE = ["visce", "irce", "vis", "ircz", "bt", "24m", "wv", "viseu", "ireu", "storm", "csr5", "csr"]
+TYPE = ["visce", "irce", "vis", "ircz", "bt", "24m", "wv", "viseu", "ireu", "lightning", "radar"]
 TYPE += ["all"]
 
 DESCR = [
@@ -89,9 +89,7 @@ _("VIS-IR - 'Traditional' RGB combination, approaching human eye perception.\n\n
 _("IR - Traditional display\n\n\
   - DARK - warm areas\n\
   - LIGHT - cold areas"),
-_("Storm detection"),
-_("Radar information\n\n\
-  - current composite radar image from the Czech radar (worse resolution, but 5 minuts interval)"),
+_("Lightning detection"),
 _("Radar information\n\n\
   - current composite radar image from the Czech radar network CZRAD (from Brdy-Praha and Skalky radars)"),
 ""
@@ -105,9 +103,9 @@ if getDesktop(0).size().width() >= 1280:
 	HD = True
 
 # position of BACKGROUND and MER must be equal as position of SUBDIR and TYPE. For unused item use e.png
-BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "e.png", "radar5.png", "radar.png"]
-MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "estorm.png"]
-HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "e.png", "estorm.png"]
+BACKGROUND = ["bgce.png", "bgce.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgcz.png", "bgeu.png", "bgeu.png", "radar.png", "radar.png"]
+MER = ["merce.png", "merce.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mercz.png", "mereu.png", "mereu.png", "e.png"]
+HOME = ["homece.png", "homece.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "homecz.png", "e.png", "e.png", "e.png"]
 # fallback items for future TYPE extensions
 for i in range(0, len(TYPE) + 1):
 	BACKGROUND.append("e.png")
@@ -117,8 +115,8 @@ for i in range(0, len(TYPE) + 1):
 EMPTYFRAME = "e.jpg"
 RADAR_MM = "radar_mm.png"
 HOME_CSR = "homecsr.png"
-HOME_CSR5 = "homecsr5.png"
-RADAR5CITY = "radar5c.png"
+HOME_RADAR = "homeradar.png"
+RADAR_CITY = "radar_cities.png"
 REGIONS = "bgczregions.png"
 
 config.plugins.czechmeteo.nr = ConfigSelection(default="8", choices=[("4", "1h"), ("8", "2h"), ("12", "3h"), ("24", "6h"), ("48", "12h"), ("96", "24h"), ("192", "48h")])
@@ -620,11 +618,11 @@ class czechMeteo(Screen, HelpableScreen):
 
 	def setIndex(self):
 		self.idx = self.startIdx = 0
-		if TYPE[self.typ] == "storm": # 10 minuts
+		if TYPE[self.typ] == "lightning": # 10 minuts
 			if self.maxFrames > int(cfg.nr.value) // 4 * 6:
 				if cfg.frames.value == "0":
 					self.startIdx = self.maxFrames - int(cfg.nr.value) // 4 * 6 - 1
-		elif TYPE[self.typ] == "csr5": # 5 minuts
+		elif TYPE[self.typ] == "radar": # 5 minuts
 			if self.maxFrames > int(cfg.nr.value) // 4 * 12:
 				if cfg.frames.value == "0":
 					self.startIdx = self.maxFrames - int(cfg.nr.value) // 4 * 12 - 1
@@ -677,13 +675,13 @@ class czechMeteo(Screen, HelpableScreen):
 				self["slide"].show()
 
 	def setExtension(self):
-		if TYPE[self.typ] in ("storm", "csr", "csr5"):
+		if TYPE[self.typ] in ("lightning", "radar"):
 			self.EXT = ".png"
 		else:
 			self.EXT = ".jpg"
 
 	def displayFrame(self, path):
-		if TYPE[self.typ] in ("csr", "csr5"):
+		if TYPE[self.typ] in ("lightning", "radar"):
 			self.borderLoad.startDecode(path)
 		else:
 			self.picload.startDecode(path)
@@ -772,26 +770,29 @@ class czechMeteo(Screen, HelpableScreen):
 
 	def redrawBorder(self):
 		if self.isSynaptic:
-			if TYPE[self.typ] not in("csr", "csr5"):
+			if TYPE[self.typ] not in ("lightning", "radar"):
 				self.borderLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
 				self.picload.startDecode(PPATH + BACKGROUND[len(BACKGROUND) - 1])
 			self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			self.firstSynaptic = False
 		else:
-			if TYPE[self.typ] in ("csr", "csr5"):
-				CSR_BACKGROUND = BACKGROUND[self.typ]
-				if TYPE[self.typ] == "csr5" and cfg.city.value:
-					CSR_BACKGROUND = RADAR5CITY
-				self.picload.startDecode(PPATH + CSR_BACKGROUND)
-				if cfg.mer.value and fileExists(E2PATH + RADAR_MM): # for own mm picture
-					self.merLoad.startDecode(E2PATH + RADAR_MM)
+			if TYPE[self.typ] in ("lightning", "radar"):
+				RADAR_BACKGROUND = BACKGROUND[self.typ]
+				if cfg.city.value:
+					RADAR_BACKGROUND = RADAR_CITY
+				self.picload.startDecode(PPATH + RADAR_BACKGROUND)
+
+				if TYPE[self.typ] == "radar":
+					if cfg.mer.value and fileExists(E2PATH + RADAR_MM): # for own mm picture
+						self.merLoad.startDecode(E2PATH + RADAR_MM)
+					else:
+						self.merLoad.startDecode(PPATH + RADAR_MM)
 				else:
-					self.merLoad.startDecode(PPATH + RADAR_MM)
-				if cfg.home.value and TYPE[self.typ] == "csr" and fileExists(E2PATH + HOME_CSR):
-					self.homeLoad.startDecode(E2PATH + HOME_CSR)
-				elif cfg.home.value and TYPE[self.typ] == "csr5" and fileExists(E2PATH + HOME_CSR5):
-					self.homeLoad.startDecode(E2PATH + HOME_CSR5)
+					self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
+
+				if cfg.home.value and fileExists(E2PATH + HOME_RADAR):
+					self.homeLoad.startDecode(E2PATH + HOME_RADAR)
 				else:
 					self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 			else:
@@ -805,7 +806,7 @@ class czechMeteo(Screen, HelpableScreen):
 					self.merLoad.startDecode(PPATH + MER[len(TYPE) - 1])
 
 				if cfg.home.value: # home position
-					if TYPE[self.typ] in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "storm") and fileExists(E2PATH + HOME[self.typ]):
+					if TYPE[self.typ] in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "lightning") and fileExists(E2PATH + HOME[self.typ]):
 						self.homeLoad.startDecode(E2PATH + HOME[self.typ])
 					else:
 						self.homeLoad.startDecode(PPATH + MER[len(TYPE) - 1])
@@ -989,12 +990,12 @@ class czechMeteo(Screen, HelpableScreen):
 			if not self.refreshLast:  # dont read if refresh
 				self.downloadOnce(typ)
 
-		if typ in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "csr5", "all"):
+		if typ in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "radar", "all"):
 			if not self.stopRead:
 				self.downloadMain(typ)
-		if typ in ("storm", "all"):
+		if typ in ("lightning", "all"):
 			if not self.stopRead:
-				self.downloadStorm(typ)
+				self.downloadLightning(typ)
 		if self.typ == len(TYPE) - 1:  # from ALL after start of plugin set typ "After All"
 			self.typ = int(cfg.typeafterall.value)
 
@@ -1087,7 +1088,7 @@ class czechMeteo(Screen, HelpableScreen):
 		#print("[CzechMeteo] >>>Main>>>", typ,  TYPE.index(typ))
 		interval = int(cfg.nr.value) * 900
 		step = 900			# 15 minut
-		if typ == "csr5":		# 5 minuts radar
+		if typ == "radar":		# 5 minuts radar
 			step = 300
 		now = int(time())		# LT
 		now15 = (now // step) * step 	# last x min
@@ -1100,80 +1101,71 @@ class czechMeteo(Screen, HelpableScreen):
 			if cfg.delete.value == "3":
 				startDel = now15 - int(cfg.nr.choices[len(cfg.nr.choices) - 1]) * 900
 			if typ == "all":
-				for i in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "csr", "csr5"):
+				for i in ("ireu", "viseu", "irce", "visce", "vis", "ircz", "bt", "24m", "wv", "radar"):
 					self.deleteOldFiles(i, gmtime(startDel))
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
 
-		eu = "msgeu-1160x800"
-		ce = "msgce-1160x800"
-		cz = "msgcz-1160x800"
-
-		page = "https://intranet.chmi.cz/files/portal/docs/meteo/sat/msg_hrit"
+		page = "https://opendata.chmi.cz/meteorology/weather/satellite/geo"
 
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
 
 			if typ == "ireu" or typ == "all":
-				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, eu, eu, frDate, frTime)
+				url = "%s/ir108/%s%s_geo_ir108_eu.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ireu")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "viseu" or typ == "all":
-				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, eu, eu, frDate, frTime)
+				url = "%s/vis-ir/%s%s_geo_vis-ir_eu.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("viseu")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "irce" or typ == "all":
-				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, ce, ce, frDate, frTime)
+				url = "%s/ir108/%s%s_geo_ir108_ce.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("irce")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "visce" or typ == "all":
-				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, ce, ce, frDate, frTime)
+				url = "%s/vis-ir/%s%s_geo_vis-ir_ce.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("visce")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "vis" or typ == "all":
-				url = "%s/img-%s-vis-ir/%s.vis-ir.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				url = "%s/vis-ir/%s%s_geo_vis-ir_cz.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("vis")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "ircz" or typ == "all":
-				url = "%s/img-%s-ir108/%s.ir108.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				url = "%s/ir108/%s%s_geo_ir108_cz.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("ircz")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "bt" or typ == "all":
-				url = "%s/img-%s-ir108BT/%s.ir108BT.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				url = "%s/ir108BT/%s%s_geo_ir108BT_cz.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("bt")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "wv" or typ == "all":
-				url = "%s/img-%s-wv062/%s.wv062.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				url = "%s/wv062/%s%s_geo_wv062_cz.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("wv")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 			if typ == "24m" or typ == "all":
-				url = "%s/img-%s-24M/%s.24M.%s.%s.0.jpg" % (page, cz, cz, frDate, frTime)
+				url = "%s/24M/%s%s_geo_24M_cz.jpg" % (page, frDate, frTime)
 				path = "%s%s%s.jpg" % (self.getDir(TYPE.index("24m")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
-			if typ == "csr" or typ == "all":
-				url = "https://intranet.chmi.cz/files/portal/docs/meteo/rad/data_tr_png_1km/pacz23.z_max3d.%s.%s.0.png" % (frDate, frTime)
-				path = "%s%s%s.png" % (self.getDir(TYPE.index("csr")), frDate, frTime)
-				if not self.downloadFrame(url, path):
-					break
-			if typ == "csr5" or typ == "all":
-				url = "https://intranet.chmi.cz/files/portal/docs/meteo/rad/inca-cz/data/czrad-z_max3d/pacz2gmaps3.z_max3d.%s.%s.0.png" % (frDate, frTime)
-				path = "%s%s%s.png" % (self.getDir(TYPE.index("csr5")), frDate, frTime)
+			if typ == "radar" or typ == "all":
+				url = "https://opendata.chmi.cz/meteorology/weather/radar/composite/maxz/png/pacz2gmaps3.z_max3d.%s.%s.0.png" % (frDate, frTime)
+				path = "%s%s%s.png" % (self.getDir(TYPE.index("radar")), frDate, frTime)
 				if not self.downloadFrame(url, path):
 					break
 
-	def downloadStorm(self, typ):
-		#print("[CzechMeteo] >>>Storm>>>", typ, TYPE.index(typ))
+	def downloadLightning(self, typ):
+		#print("[CzechMeteo] >>>Lightning>>>", typ, TYPE.index(typ))
 		interval = int(cfg.nr.value) * 900
 		step = 600			# 10 minut
 		now = int(time())		# LT
@@ -1186,7 +1178,7 @@ class czechMeteo(Screen, HelpableScreen):
 			if cfg.delete.value == "3":
 				startDel = now10 - int(cfg.nr.choices[len(cfg.nr.choices) - 1]) * 900
 			if typ == "all":
-				for i in ("storm",):
+				for i in ("lightning",):
 					self.deleteOldFiles(i, gmtime(startDel))
 			else:
 				self.deleteOldFiles(typ, gmtime(startDel))
@@ -1194,8 +1186,8 @@ class czechMeteo(Screen, HelpableScreen):
 		for i in range(start, stop, step):
 			frDate = strftime("%Y%m%d", gmtime(i))  # utc
 			frTime = strftime("%H%M", gmtime(i))  # utc
-			url = "https://intranet.chmi.cz/files/portal/docs/meteo/blesk/data/pacz21.blesk.%s.%s.10_9.png" % (frDate, frTime)
-			path = "%s%s%s.png" % (self.getDir(TYPE.index("storm")), frDate, frTime)
+			url = "https://produkty.chmi.cz/radar/input_data/blesk/pacz2gmaps3.blesk.%s.%s.png" % (frDate, frTime)
+			path = "%s%s%s.png" % (self.getDir(TYPE.index("lightning")), frDate, frTime)
 			if not self.downloadFrame(url, path):
 				break
 
@@ -1279,8 +1271,8 @@ class czechMeteoCfg(Screen, ConfigListScreen):
 		cfgList.append(getConfigListEntry(_("Local time in info"), cfg.localtime))
 		cfgList.append(getConfigListEntry(_("Parallels and meridians"), cfg.mer))
 		cfgList.append(getConfigListEntry(_("Display CZ Regions"), cfg.regions))
-		cfgList.append(getConfigListEntry(_("Display cities in 5mins radar background"), cfg.city))
-		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610), homecsr5.png (680x640) and estorm.png (438*338) with mark there in /etc/enigma.")))
+		cfgList.append(getConfigListEntry(_("Display cities in radar and lightning background"), cfg.city))
+		cfgList.append(getConfigListEntry(_("Display home position"), cfg.home, _("For it must be files homece.png, homecz.png (both as 1160*800), homecsr.png (810*610), homeradar.png (680x640) with mark there in /etc/enigma.")))
 		cfgList.append(self.tmpdir_entry)
 		self["config"].list = cfgList
 		ConfigListScreen.__init__(self, cfgList, session, on_change=self.changedEntry)
