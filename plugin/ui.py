@@ -863,6 +863,7 @@ class czechMeteo(Screen, HelpableScreen):
 		self.isShow = False
 
 	def displaySynaptic(self):
+		return
 		if self.isShow:
 			self.stopSlideShow()
 		if self.isReading:
